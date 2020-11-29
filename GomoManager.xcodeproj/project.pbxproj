@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E02AC5C2573477E00D4CE0B /* EditFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E02AC5B2573477E00D4CE0B /* EditFoodViewController.swift */; };
 		5ECAFA9A257334C50055672E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA99257334C50055672E /* AppDelegate.swift */; };
 		5ECAFA9C257334C50055672E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA9B257334C50055672E /* SceneDelegate.swift */; };
 		5ECAFA9E257334C50055672E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA9D257334C50055672E /* ViewController.swift */; };
@@ -63,6 +64,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E02AC5B2573477E00D4CE0B /* EditFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFoodViewController.swift; sourceTree = "<group>"; };
 		5ECAFA96257334C50055672E /* GomoManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GomoManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ECAFA99257334C50055672E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5ECAFA9B257334C50055672E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 				5ECAFA9D257334C50055672E /* ViewController.swift */,
 				5ECAFB3C25733ACE0055672E /* AddMenuViewController.swift */,
 				5ECAFB4425733AE60055672E /* DetailFoodViewController.swift */,
+				5E02AC5B2573477E00D4CE0B /* EditFoodViewController.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				5ECAFB4B25733B270055672E /* LoginViewController.swift in Sources */,
 				5ECAFB3725733A920055672E /* StatisticalViewController.swift in Sources */,
 				5ECAFB7225733C1D0055672E /* AdminCell.swift in Sources */,
+				5E02AC5C2573477E00D4CE0B /* EditFoodViewController.swift in Sources */,
 				5ECAFB5525733B7D0055672E /* setUpTableViewController.swift in Sources */,
 				5ECAFB8825733D510055672E /* MenuCell.swift in Sources */,
 				5ECAFB6B25733BEC0055672E /* AdminViewController.swift in Sources */,

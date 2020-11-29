@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 
 class DetailFoodViewController: UIViewController {
-
+    
     @IBOutlet weak var imageFood: UIImageView!
     @IBOutlet weak var lblNameFood: UILabel!
     @IBOutlet weak var lblPrice: UILabel!
@@ -21,13 +21,12 @@ class DetailFoodViewController: UIViewController {
     var price: String = ""
     var content: String = ""
     var idFood: String = ""
+    var statusMenu = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.tintColor = .black
-        imageFood.alpha = 0.9
         setData()
-        
     }
     
     func setData(){
@@ -35,29 +34,51 @@ class DetailFoodViewController: UIViewController {
         lblNameFood.text = name
         lblPrice.text = price
         lblContent.text = content
+        self.navigationController?.navigationBar.tintColor = .black
+        imageFood.alpha = 0.9
     }
     
     @IBAction func btnDeleteFood(_ sender: Any) {
-        let alert = UIAlertController(title: "Delete transaction", message: "Are you sure to delete this transaction?", preferredStyle: .actionSheet)
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
-            Defined.ref.child("Menu/Food/\(self.idFood)").removeValue { (error, reference) in
-                if error != nil {
-                    print("Error: \(error!)")
-                } else {
-                    print(reference)
-                    print("Remove successfully")
-                    self.navigationController?.popViewController(animated: true)
+        let alert = UIAlertController(title: "Delete Food",
+                                      message: "Are you sure to delete this Food?",
+                                      preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Cancel",
+                                      style: .cancel,
+                                      handler: nil))
+        alert.addAction(UIAlertAction(title: "Yes",
+                                      style: .default,
+                                      handler: { action in
+            if self.statusMenu == "drink"{
+                Defined.ref.child("Menu/Drink/\(self.idFood)").removeValue { (error, reference) in
+                    if error != nil {
+                        print(error!)
+                    } else {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+            }else{
+                Defined.ref.child("Menu/Food/\(self.idFood)").removeValue { (error, reference) in
+                    if error != nil {
+                        print(error!)
+                    } else {
+                        self.navigationController?.popViewController(animated: true)
+                    }
                 }
             }
         }))
         self.present(alert, animated: true)
-        
     }
     
     @IBAction func btnEditFood(_ sender: Any) {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EditFoodViewController") as! EditFoodViewController
+        vc.img = img
+        vc.idFood = idFood 
+        vc.name = name
+        vc.content = content
+        vc.idFood = idFood
+        vc.price = price
+        vc.statusMenu = statusMenu
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
-    
 }

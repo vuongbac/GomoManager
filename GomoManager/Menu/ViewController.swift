@@ -15,28 +15,28 @@ class ViewController: UIViewController {
     @IBOutlet weak var btnAddFood: UIBarButtonItem!
     
     var foods = [Food]()
-    var index = 0
+    var status = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         MenuCell.registerCellByNib(tableView)
         getFoodsData()
+        status = "food"
     }
     
     @IBAction func btnSelectMenu(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             getFoodsData()
-            index = 1
-            
+            status = "food"
         }else{
             getDrinkData()
-            index = 0
+            status = "drink"
         }
     }
     
     @IBAction func btnAddMenu(_ sender: Any) {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddMenuViewController") as! AddMenuViewController
-        vc.indexMenu = index
+        vc.statusMenu = status
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -104,7 +104,7 @@ extension ViewController:  UITableViewDelegate, UITableViewDataSource{
         vc.name = fd.name ?? ""
         vc.price = String(fd.price!)
         vc.idFood = fd.id ?? ""
-        
+        vc.statusMenu = status
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
