@@ -43,6 +43,7 @@
 		5ECAFB8125733CA60055672E /* BillCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ECAFB7F25733CA60055672E /* BillCell.xib */; };
 		5ECAFB8825733D510055672E /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFB8625733D510055672E /* MenuCell.swift */; };
 		5ECAFB8925733D510055672E /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ECAFB8725733D510055672E /* MenuCell.xib */; };
+		5EE4EF01257561D500E04369 /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE4EF00257561D500E04369 /* Table.swift */; };
 		FF39EC25C7CCC634C77EDEF3 /* Pods_GomoManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4DA176368D6F3F6914BF2EB /* Pods_GomoManager.framework */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +107,7 @@
 		5ECAFB7F25733CA60055672E /* BillCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BillCell.xib; sourceTree = "<group>"; };
 		5ECAFB8625733D510055672E /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		5ECAFB8725733D510055672E /* MenuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
+		5EE4EF00257561D500E04369 /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
 		9ECB50927A215826654E9EB6 /* Pods-GomoManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GomoManager.debug.xcconfig"; path = "Target Support Files/Pods-GomoManager/Pods-GomoManager.debug.xcconfig"; sourceTree = "<group>"; };
 		C63C3506A8960D0FD37C8CD3 /* Pods-GomoManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GomoManager.release.xcconfig"; path = "Target Support Files/Pods-GomoManager/Pods-GomoManager.release.xcconfig"; sourceTree = "<group>"; };
 		D4DA176368D6F3F6914BF2EB /* Pods_GomoManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GomoManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -259,6 +261,7 @@
 				5ECAFB17257339A30055672E /* Bill.swift */,
 				5ECAFB1C257339B40055672E /* Employees.swift */,
 				5ECAFB21257339D00055672E /* Account.swift */,
+				5EE4EF00257561D500E04369 /* Table.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 				5ECAFB3725733A920055672E /* StatisticalViewController.swift in Sources */,
 				5ECAFB7225733C1D0055672E /* AdminCell.swift in Sources */,
 				5E02AC5C2573477E00D4CE0B /* EditFoodViewController.swift in Sources */,
+				5EE4EF01257561D500E04369 /* Table.swift in Sources */,
 				5ECAFB5525733B7D0055672E /* setUpTableViewController.swift in Sources */,
 				5ECAFB8825733D510055672E /* MenuCell.swift in Sources */,
 				5ECAFB6B25733BEC0055672E /* AdminViewController.swift in Sources */,
@@ -748,6 +752,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LK52C45LY8;
 				INFOPLIST_FILE = GomoManager/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -767,6 +772,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LK52C45LY8;
 				INFOPLIST_FILE = GomoManager/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -28,8 +28,10 @@ class MenuCell: BaseTBCell {
     }
     
     func setUp(data:Food){
+        Defined.formatter.groupingSeparator = "."
+        Defined.formatter.numberStyle = .decimal
+        lblPrice.text = "\(Defined.formatter.string(from: NSNumber(value: data.price ?? 0 ))!)" + " VNĐ"
         lblNameFood.text = data.name
-        lblPrice.text = String(data.price!) + " VND"
         lblContent.text = data.note
         iconFood.sd_setImage(with: URL(string: data.image ?? ""), completed: nil)
     }

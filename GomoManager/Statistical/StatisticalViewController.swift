@@ -24,11 +24,10 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
     var totalMonth = [Int](repeating: 0, count: 12)
     var totalYear = 0
     var totalDay = 0
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataPicker = UIDatePicker()
-        dataPicker?.datePickerMode = .date
+        setUpdata()
         getDataBill()
     }
     
@@ -39,13 +38,20 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
         }
     }
     
-    
-    
+    func setUpdata() {
+        dataPicker = UIDatePicker()
+        dataPicker?.datePickerMode = .date
+        Defined.formatter.groupingSeparator = "."
+        Defined.formatter.numberStyle = .decimal
+    }
     
     func getDataBill(){
         Defined.ref.child("Bill/Done").observe(DataEventType.value) { [self] (DataSnapshot) in
             if let snapshort = DataSnapshot.children.allObjects as? [DataSnapshot]{
                 self.bills.removeAll()
+                self.totalYear = 0
+                self.totalDay = 0
+                self.totalMonth = [Int](repeating: 0, count: 12)
                 for snap in snapshort {
                     let id = snap.key
                     if let value = snap.value as? [String: Any] {
@@ -53,21 +59,31 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
                         let detilbill = value["detilbill"] as! String
                         let numbertable = value["numbertable"] as! String
                         let total = value["total"] as! Int
+                        print(total)
                         
                         let bill = Bill(id: id, numberTable: numbertable, detailFood: detilbill, total: total, date: date)
                         self.bills.append(bill)
-                        
                         let tempDate = date.split(separator: "/")
+                        // lấy tổng doanh thu ngày hiên tại
+                        
                         // lấy tổng doanh thu tháng
                         let checkDate = tempDate[1]
                         
                         // lấy tổng doanh thu của cả năm
                         let checkYear = tempDate[2]
-                        
-                        
+                        if checkYear == "2020" {
+                            self.totalYear += total
+                            self.amountYear.text = "\(Defined.formatter.string(from: NSNumber(value: totalYear ))!)" + " VNĐ"
+                        }
+                        let dateThis = dateFormatTime(date: Date())
+                        let temp = dateThis.split(separator: "/")
+                        let checkDayData = tempDate[0]
+                        let checkDaySystem = temp[0]
+                        if checkDayData == checkDaySystem{
+                            self.totalDay += total
+                            self.amountDay.text = "\(Defined.formatter.string(from: NSNumber(value: totalDay ))!)" + " VNĐ"
+                        }
                         self.totalMonth[(Int(String(checkDate)) ?? 0) - 1] += total/1000000
-                        self.totalYear += total
-                        self.amountYear.text = String(totalYear)
                         self.setChartValue(name: self.moth2, data: self.totalMonth)
                     }
                 }
@@ -88,4 +104,9 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
         
     }
     
+    func dateFormatTime(date : Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        return dateFormatter.string(from: date)
+    }
 }

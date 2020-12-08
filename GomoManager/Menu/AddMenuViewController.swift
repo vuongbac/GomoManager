@@ -53,6 +53,7 @@ class AddMenuViewController: UIViewController {
                     "namefood": self.txtNameFood.text!,
                     "notefood": self.txtContent.text!,
                     "price" : self.price,
+                    "statusFood":"1",
                     "imagefood":"\(url)"]
                 if statusMenu == "drink"{
                     Defined.ref.child("Menu/Drink").childByAutoId().setValue(writeData)
@@ -67,6 +68,12 @@ class AddMenuViewController: UIViewController {
     
     @IBAction func btnAddFood(_ sender: Any) {
         addDataMenu()
+    }
+    
+    func checkValidate() {
+        var name = txtNameFood.text
+        var price = txtPriceFood.text
+        var content = txtContent.text
     }
 }
 

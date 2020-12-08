@@ -16,6 +16,7 @@ class Defined {
     static let storage = Storage.storage().reference()
     static let ref = Database.database().reference()
     static let formatter = NumberFormatter()
+    
 }
 
 struct keys {

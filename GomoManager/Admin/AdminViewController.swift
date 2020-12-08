@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import SDWebImage
+import GoogleSignIn
 
 class AdminViewController: UIViewController {
     
@@ -19,7 +20,7 @@ class AdminViewController: UIViewController {
     var listTitleCell = ["Quản lý nhân viên", "Thay đổi số bàn",  "Cài đặt thông báo", "Đăng xuất"]
     var listImageCell = ["manager", "notification", "setup_table", "logout"]
     
-    let email = Defined.defaults.value(forKey: "email") as! String
+    let email = Defined.defaults.value(forKey: "email") as? String
     let avatar = Defined.defaults.value(forKey: "avatar") as? String
     
     override func viewDidLoad() {
@@ -32,6 +33,7 @@ class AdminViewController: UIViewController {
     
     func setUp()  {
         nameAdmin.text = email
+        avatarAdmin.layer.cornerRadius = 50
         avatarAdmin.sd_setImage(with: URL(string: "https://lh3.googleusercontent.com\(String(avatar ?? ""))"), completed: nil)
         print(avatar)
     }
@@ -57,9 +59,18 @@ extension AdminViewController: UITableViewDelegate, UITableViewDataSource{
         case 1:
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "setUpTableViewController") as! setUpTableViewController
             self.navigationController?.pushViewController(vc, animated: true)
-        default:
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EmployeesViewController") as! EmployeesViewController
+        case 2:
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "setUpTableViewController") as! setUpTableViewController
             self.navigationController?.pushViewController(vc, animated: true)
+        default:
+            DispatchQueue.main.async {
+                Defined.defaults.removeObject(forKey: "email")
+                Defined.defaults.removeObject(forKey: "avatar")
+                GIDSignIn.sharedInstance()?.signOut()
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                vc.modalPresentationStyle  = .fullScreen
+                self.present(vc, animated: true, completion: nil)
+            }
         }
     }
 }
