@@ -56,7 +56,7 @@ class AddMenuViewController: UIViewController {
                     "statusFood":"1",
                     "imagefood":"\(url)"]
                 if statusMenu == "drink"{
-                    Defined.ref.child("Menu/Drink").childByAutoId().setValue(writeData)
+                    Defined.ref.child("Menu/Drink").child(self.txtNameFood.text!).setValue(writeData)
                 }else{
                     Defined.ref.child("Menu/Food").childByAutoId().setValue(writeData)
                 }
@@ -70,11 +70,11 @@ class AddMenuViewController: UIViewController {
         addDataMenu()
     }
     
-    func checkValidate() {
-        var name = txtNameFood.text
-        var price = txtPriceFood.text
-        var content = txtContent.text
-    }
+//    func checkValidate() {
+//        var name = txtNameFood.text
+//        var price = txtPriceFood.text
+//        var content = txtContent.text
+//    }
 }
 
 extension AddMenuViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate{
