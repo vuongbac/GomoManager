@@ -53,7 +53,8 @@ class ViewController: UIViewController {
                         let imagefood = value["imagefood"] as! String
                         let notefood = value["notefood"] as! String
                         let pricefood = value["price"] as! Int
-                        let food = Food(id: id, name: namefood, price: pricefood, image: imagefood, note: notefood)
+                        let statusFood = value["statusFood"] as? String
+                        let food = Food(id: id, name: namefood, price: pricefood, image: imagefood, note: notefood ,statusFood: statusFood)
                         self.foods.append(food)
                     }
                 }
@@ -70,11 +71,12 @@ class ViewController: UIViewController {
                 for snap in snapshort {
                     let id = snap.key
                     if let value = snap.value as? [String: Any] {
-                        let namefood = value["namefood"] as! String
-                        let imagefood = value["imagefood"] as! String
-                        let notefood = value["notefood"] as! String
-                        let pricefood = value["price"] as! Int
-                        let food = Food(id: id, name: namefood, price: pricefood, image: imagefood, note: notefood)
+                        let namefood = value["namefood"] as? String
+                        let imagefood = value["imagefood"] as? String
+                        let notefood = value["notefood"] as? String
+                        let pricefood = value["price"] as? Int
+                        let statusFood = value["statusFood"] as? String
+                        let food = Food(id: id, name: namefood, price: pricefood, image: imagefood, note: notefood,statusFood: statusFood)
                         self.foods.append(food)
                     }
                 }
@@ -105,6 +107,7 @@ extension ViewController:  UITableViewDelegate, UITableViewDataSource{
         vc.price = String(fd.price!)
         vc.idFood = fd.id ?? ""
         vc.statusMenu = status
+        vc.statusFood = fd.statusFood ?? ""
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

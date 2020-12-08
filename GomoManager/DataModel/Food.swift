@@ -13,6 +13,7 @@ struct Food: Codable {
     var price: Int? = nil
     var image: String? = nil
     var note: String? = nil
+    var statusFood:String? = nil
 }
 
     

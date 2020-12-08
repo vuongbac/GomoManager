@@ -23,11 +23,13 @@ class DetailFoodViewController: UIViewController {
     var content: String = ""
     var idFood: String = ""
     var statusMenu = ""
-    
+    var statusFood = "" 
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setData()
+
     }
     
     func setData(){
@@ -40,11 +42,11 @@ class DetailFoodViewController: UIViewController {
         lblContent.text = content
         self.navigationController?.navigationBar.tintColor = .black
         imageFood.alpha = 0.9
-        
-        btnStatus.isOn = (Defined.defaults.value(forKey: idFood) != nil)
-
-        
-        
+        if statusFood == "1"{
+            btnStatus.isOn = false
+        }else{
+            btnStatus.isOn = true
+        }
     }
     
     @IBAction func btnDeleteFood(_ sender: Any) {
@@ -92,32 +94,20 @@ class DetailFoodViewController: UIViewController {
     }
     
     @IBAction func btnStatusFood(_ sender: UISwitch) {
-      
         if sender.isOn{
-            Defined.defaults.set(true, forKey: idFood)
-            let writeData: [String: Any] = [
-                "namefood": name,
-                "notefood": content,
-                "price" : Int(price),
-                "statusFood":"1",
-                "imagefood":img]
+            print("on")
             if statusMenu == "drink"{
-                Defined.ref.child("Menu/Drink").child("\(idFood)").updateChildValues(writeData)
+                Defined.ref.child("Menu/Drink").child(idFood).updateChildValues(["statusFood":"0"])
             }else{
-                Defined.ref.child("Menu/Food").child(idFood).updateChildValues(writeData)
+                Defined.ref.child("Menu/Food").child(idFood).updateChildValues(["statusFood":"0"])
             }
+            
         }else{
-            Defined.defaults.set(false, forKey: idFood)
-            let writeData: [String: Any] = [
-                "namefood": name,
-                "notefood": content,
-                "price" : Int(price),
-                "statusFood":"0",
-                "imagefood":img]
+            print("off")
             if statusMenu == "drink"{
-                Defined.ref.child("Menu/Drink").child("\(idFood)").updateChildValues(writeData)
+                Defined.ref.child("Menu/Drink").child(idFood).updateChildValues(["statusFood":"1"])
             }else{
-                Defined.ref.child("Menu/Food").child(idFood).updateChildValues(writeData)
+                Defined.ref.child("Menu/Food").child(idFood).updateChildValues(["statusFood":"1"])
             }
             
         }
