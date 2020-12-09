@@ -13,15 +13,23 @@ class ViewController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var btnAddFood: UIBarButtonItem!
+    let searchController = UISearchController(searchResultsController: nil)
+    
     
     var foods = [Food]()
     var status = ""
+    var strFood:[Food] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         MenuCell.registerCellByNib(tableView)
         getFoodsData()
         status = "food"
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
+        
     }
     
     @IBAction func btnSelectMenu(_ sender: UISegmentedControl) {
@@ -59,8 +67,9 @@ class ViewController: UIViewController {
                     }
                 }
             }
+            self.strFood = self.foods
             self.tableView.reloadData()
-
+            
         }
     }
     
@@ -82,14 +91,14 @@ class ViewController: UIViewController {
                 }
                 self.tableView.reloadData()
             }
-           
+            
         }
     }
 }
 
 extension ViewController:  UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return foods.count
+        return strFood.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -100,7 +109,7 @@ extension ViewController:  UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailFoodViewController") as! DetailFoodViewController
-        let fd = foods[indexPath.row]
+        let fd = strFood[indexPath.row]
         vc.content = fd.note ?? ""
         vc.img = fd.image ?? ""
         vc.name = fd.name ?? ""
@@ -109,6 +118,20 @@ extension ViewController:  UITableViewDelegate, UITableViewDataSource{
         vc.statusMenu = status
         vc.statusFood = fd.statusFood ?? ""
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+}
+extension ViewController: UISearchResultsUpdating{
+    func updateSearchResults(for searchController: UISearchController) {
+        // If we haven't typed anything into the search bar then do not filter the results
+        if searchController.searchBar.text! == "" {
+            strFood = foods
+        } else {
+            // Filter the results
+            strFood = foods.filter {$0.name!.lowercased().contains(searchController.searchBar.text!.lowercased())}
+        }
+        self.tableView.reloadData()
     }
     
     

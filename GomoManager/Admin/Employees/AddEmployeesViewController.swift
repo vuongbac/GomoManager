@@ -31,6 +31,7 @@ class AddEmployeesViewController: UIViewController {
         ImagePicker.delegate = self
         btnAdd.layer.cornerRadius = 7
         avatar.layer.cornerRadius = 50
+        avatar.layer.borderWidth = 1
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         avatar.isUserInteractionEnabled = true
         avatar.addGestureRecognizer(tapGestureRecognizer)
