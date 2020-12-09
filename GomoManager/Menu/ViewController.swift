@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     
     var foods = [Food]()
     var status = ""
-    var strFood:[Food] = []
+    var strFood = [Food]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,7 +103,7 @@ extension ViewController:  UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = MenuCell.loadCell(tableView) as! MenuCell
-        cell.setUp(data: foods[indexPath.row])
+        cell.setUp(data: strFood[indexPath.row])
         return cell
     }
     
@@ -124,16 +124,13 @@ extension ViewController:  UITableViewDelegate, UITableViewDataSource{
 }
 extension ViewController: UISearchResultsUpdating{
     func updateSearchResults(for searchController: UISearchController) {
-        // If we haven't typed anything into the search bar then do not filter the results
         if searchController.searchBar.text! == "" {
             strFood = foods
         } else {
-            // Filter the results
             strFood = foods.filter {$0.name!.lowercased().contains(searchController.searchBar.text!.lowercased())}
+            print(strFood.count)
         }
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
-    
-    
 }
 
