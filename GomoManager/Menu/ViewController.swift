@@ -49,7 +49,6 @@ class ViewController: UIViewController {
     }
     
     
-    
     func getFoodsData(){
         Defined.ref.child("Menu/Food").observe(DataEventType.value) { (DataSnapshot) in
             if let snapshort = DataSnapshot.children.allObjects as? [DataSnapshot]{
@@ -69,9 +68,9 @@ class ViewController: UIViewController {
             }
             self.strFood = self.foods
             self.tableView.reloadData()
-            
         }
     }
+    
     
     func getDrinkData(){
         Defined.ref.child("Menu/Drink").observe(DataEventType.value) { (DataSnapshot) in
@@ -89,9 +88,9 @@ class ViewController: UIViewController {
                         self.foods.append(food)
                     }
                 }
+                self.strFood = self.foods
                 self.tableView.reloadData()
             }
-            
         }
     }
 }
@@ -119,16 +118,15 @@ extension ViewController:  UITableViewDelegate, UITableViewDataSource{
         vc.statusFood = fd.statusFood ?? ""
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
 }
+
+
 extension ViewController: UISearchResultsUpdating{
     func updateSearchResults(for searchController: UISearchController) {
         if searchController.searchBar.text! == "" {
             strFood = foods
         } else {
             strFood = foods.filter {$0.name!.lowercased().contains(searchController.searchBar.text!.lowercased())}
-            print(strFood.count)
         }
         tableView.reloadData()
     }
