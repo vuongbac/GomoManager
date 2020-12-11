@@ -10,12 +10,12 @@ import Firebase
 
 class EmployeesViewController: UIViewController {
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
     var employees = [Employees]()
     override func viewDidLoad() {
         super.viewDidLoad()
-      //  getDataEmployees()
-        EmployeesCell.registerCellByNib(tableView)
+        getDataEmployees()
+        EmployeesCell1.registerCellByNib(collectionView)
     }
     
     func getDataEmployees(){
@@ -25,16 +25,17 @@ class EmployeesViewController: UIViewController {
                 for snap in snapshort {
                     let id = snap.key
                     if let value = snap.value as? [String: Any] {
-                        let name = value["name"] as! String
-                        let sex = value["sex"] as! String
-                        let phone = value["phone"] as! String
-                        let username = value["userName"] as! String
-                        let password = value["password"] as! String
-                        let em = Employees(id: id, name: name, phone: phone, sex: sex, username: username, password: password)
+                        let address = value["address"] as? String
+                        let avatar = value["avatar"] as? String
+                        let birtday = value["birthday"] as? String
+                        let email = value["email"] as? String
+                        let name = value["name"] as? String
+                        let em = Employees(id: id, address: address, avatar: avatar, birtday: birtday, email: email, name: name)
                         self.employees.append(em)
+                        print(em)
                     }
                 }
-                self.tableView.reloadData()
+            self.collectionView.reloadData()
             }
         }
     }
@@ -46,36 +47,17 @@ class EmployeesViewController: UIViewController {
     }
     
 }
-extension EmployeesViewController: UITableViewDelegate, UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension EmployeesViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return employees.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = EmployeesCell.loadCell(tableView) as! EmployeesCell
-        cell.setUpData(data: employees[indexPath.row])
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = EmployeesCell1.loadCell(collectionView, path: indexPath) as! EmployeesCell1
+        cell.setUp(data: employees[indexPath.row])
         return cell
     }
     
     
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        var em = employees[indexPath.row]
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            Defined.ref.child("Employees/\(em.id ?? "")").removeValue { (error, reference) in
-                if error != nil {
-                    print("Error: \(error!)")
-                } else {
-                    print(reference)
-                }
-            }
-        }
-        let share = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
-            // share item at indexPath
-        }
-        
-        share.backgroundColor = UIColor.orange
-        
-        return [delete, share]
-    }
-    
 }
+

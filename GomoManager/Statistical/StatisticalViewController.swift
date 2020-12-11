@@ -56,8 +56,8 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
                     let id = snap.key
                     if let value = snap.value as? [String: Any] {
                         let date = value["date"] as! String
-                        let detilbill = value["detilbill"] as! String
-                        let numbertable = value["numbertable"] as! String
+                        let detilbill = value["detilbill"] as? String
+                        let numbertable = value["numbertable"] as? String
                         let total = value["total"] as! Int
                         print(total)
                         
@@ -72,7 +72,7 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
                         // lấy tổng doanh thu của cả năm
                         let checkYear = tempDate[2]
                         if checkYear == "2020" {
-                            self.totalYear += total
+                            self.totalYear += total 
                             self.amountYear.text = "\(Defined.formatter.string(from: NSNumber(value: totalYear ))!)" + " VNĐ"
                         }
                         let dateThis = dateFormatTime(date: Date())

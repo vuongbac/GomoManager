@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		5E02AC5C2573477E00D4CE0B /* EditFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E02AC5B2573477E00D4CE0B /* EditFoodViewController.swift */; };
+		5E52F4F225828DDB00505A83 /* EmployeesCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E52F4F025828DDB00505A83 /* EmployeesCell1.swift */; };
+		5E52F4F325828DDB00505A83 /* EmployeesCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E52F4F125828DDB00505A83 /* EmployeesCell1.xib */; };
+		5E52F4FB2582A09C00505A83 /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E52F4FA2582A09B00505A83 /* Constans.swift */; };
+		5EAA985E258286DB004FB209 /* StatusTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAA985D258286DB004FB209 /* StatusTableViewController.swift */; };
+		5EAA986525828762004FB209 /* TableCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAA986325828762004FB209 /* TableCCell.swift */; };
+		5EAA986625828762004FB209 /* TableCCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EAA986425828762004FB209 /* TableCCell.xib */; };
 		5ECAFA9A257334C50055672E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA99257334C50055672E /* AppDelegate.swift */; };
 		5ECAFA9C257334C50055672E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA9B257334C50055672E /* SceneDelegate.swift */; };
 		5ECAFA9E257334C50055672E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA9D257334C50055672E /* ViewController.swift */; };
@@ -66,6 +72,12 @@
 
 /* Begin PBXFileReference section */
 		5E02AC5B2573477E00D4CE0B /* EditFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFoodViewController.swift; sourceTree = "<group>"; };
+		5E52F4F025828DDB00505A83 /* EmployeesCell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesCell1.swift; sourceTree = "<group>"; };
+		5E52F4F125828DDB00505A83 /* EmployeesCell1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeesCell1.xib; sourceTree = "<group>"; };
+		5E52F4FA2582A09B00505A83 /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
+		5EAA985D258286DB004FB209 /* StatusTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTableViewController.swift; sourceTree = "<group>"; };
+		5EAA986325828762004FB209 /* TableCCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCCell.swift; sourceTree = "<group>"; };
+		5EAA986425828762004FB209 /* TableCCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableCCell.xib; sourceTree = "<group>"; };
 		5ECAFA96257334C50055672E /* GomoManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GomoManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ECAFA99257334C50055672E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5ECAFA9B257334C50055672E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -147,6 +159,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5EAA9859258285B1004FB209 /* StatusTable */ = {
+			isa = PBXGroup;
+			children = (
+				5EAA986225828748004FB209 /* Views */,
+				5EAA985D258286DB004FB209 /* StatusTableViewController.swift */,
+			);
+			path = StatusTable;
+			sourceTree = "<group>";
+		};
+		5EAA986225828748004FB209 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5EAA986325828762004FB209 /* TableCCell.swift */,
+				5EAA986425828762004FB209 /* TableCCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		5ECAFA8D257334C50055672E = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +202,7 @@
 		5ECAFA98257334C50055672E /* GomoManager */ = {
 			isa = PBXGroup;
 			children = (
+				5EAA9859258285B1004FB209 /* StatusTable */,
 				5ECAFB5225733B440055672E /* Admin */,
 				5ECAFB4925733AFE0055672E /* Login */,
 				5ECAFB3B25733AA50055672E /* Menu */,
@@ -221,6 +252,7 @@
 				5ECAFA9B257334C50055672E /* SceneDelegate.swift */,
 				5ECAFA99257334C50055672E /* AppDelegate.swift */,
 				5ECAFAF1257338DE0055672E /* TabBarController.swift */,
+				5E52F4FA2582A09B00505A83 /* Constans.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -329,6 +361,8 @@
 				5ECAFB7125733C1D0055672E /* AdminCell.xib */,
 				5ECAFB7725733C5E0055672E /* EmployeesCell.swift */,
 				5ECAFB7825733C5E0055672E /* EmployeesCell.xib */,
+				5E52F4F025828DDB00505A83 /* EmployeesCell1.swift */,
+				5E52F4F125828DDB00505A83 /* EmployeesCell1.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -462,8 +496,10 @@
 				5ECAFB8925733D510055672E /* MenuCell.xib in Resources */,
 				5ECAFAA6257334C80055672E /* LaunchScreen.storyboard in Resources */,
 				5ECAFB27257339E60055672E /* GoogleService-Info.plist in Resources */,
+				5E52F4F325828DDB00505A83 /* EmployeesCell1.xib in Resources */,
 				5ECAFB7A25733C5E0055672E /* EmployeesCell.xib in Resources */,
 				5ECAFAA3257334C80055672E /* Assets.xcassets in Resources */,
+				5EAA986625828762004FB209 /* TableCCell.xib in Resources */,
 				5ECAFAA1257334C50055672E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -554,9 +590,11 @@
 				5ECAFAF2257338DE0055672E /* TabBarController.swift in Sources */,
 				5ECAFB4525733AE60055672E /* DetailFoodViewController.swift in Sources */,
 				5ECAFB6625733BC10055672E /* AddEmployeesViewController.swift in Sources */,
+				5EAA986525828762004FB209 /* TableCCell.swift in Sources */,
 				5ECAFA9A257334C50055672E /* AppDelegate.swift in Sources */,
 				5ECAFB0B2573397A0055672E /* Defined.swift in Sources */,
 				5ECAFB2C25733A170055672E /* BillViewController.swift in Sources */,
+				5EAA985E258286DB004FB209 /* StatusTableViewController.swift in Sources */,
 				5ECAFAFD2573392F0055672E /* BaseCLCell.swift in Sources */,
 				5ECAFB13257339920055672E /* Food.swift in Sources */,
 				5ECAFB5E25733BA50055672E /* EmployeesViewController.swift in Sources */,
@@ -573,6 +611,8 @@
 				5ECAFB5525733B7D0055672E /* setUpTableViewController.swift in Sources */,
 				5ECAFB8825733D510055672E /* MenuCell.swift in Sources */,
 				5ECAFB6B25733BEC0055672E /* AdminViewController.swift in Sources */,
+				5E52F4F225828DDB00505A83 /* EmployeesCell1.swift in Sources */,
+				5E52F4FB2582A09C00505A83 /* Constans.swift in Sources */,
 				5ECAFA9C257334C50055672E /* SceneDelegate.swift in Sources */,
 				5ECAFB3D25733ACE0055672E /* AddMenuViewController.swift in Sources */,
 			);

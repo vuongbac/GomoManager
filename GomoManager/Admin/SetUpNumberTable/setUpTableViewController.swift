@@ -17,7 +17,6 @@ class setUpTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getNumberTable()
-        print(updateTable)
     }
     
     func getNumberTable(){
@@ -25,7 +24,7 @@ class setUpTableViewController: UIViewController {
             self.tables.removeAll()
             if let snapshort = DataSnapshot.children.allObjects as? [DataSnapshot]{
                 for snap in snapshort {
-                    let id = snap.key
+                    _ = snap.key
                     if let value = snap.value as? [String: Any] {
                         let statu = value["statu"] as! Int
                         let numberTable = value["NumberTable"] as! Int
@@ -43,14 +42,13 @@ class setUpTableViewController: UIViewController {
     
     @IBAction func btnSetUpTable(_ sender: Any) {
         if updateTable == 3  {
-            let alert = UIAlertController(title: "Gomo ", message: "Vẫn còn bàn đang hoạt động chưa thể đặt lại số bàn", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Tôi đã hiểu ", style: UIAlertAction.Style.default, handler: nil))
+            let alert = UIAlertController(title: Constans.title, message: Constans.message1, preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: Constans.ok, style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }else{
-            
-            var dialogMessage = UIAlertController(title: "Gomo", message: "Bạn có muốn thay đổi số bàn hiện tại trong quán không?", preferredStyle: .alert)
-            let ok = UIAlertAction(title: "Đồng ý", style: .default, handler: { (action) -> Void in
-                
+            let dialogMessage = UIAlertController(title:Constans.title, message: Constans.message2, preferredStyle: .alert)
+            let ok = UIAlertAction(title: Constans.ok, style: .default, handler: { (action) -> Void in
+                Defined.ref.child("Table").removeValue()
                 if let strTable = self.lblCountTable.text,
                    let intTable = Int(strTable){
                     self.numberTable = intTable
@@ -62,12 +60,11 @@ class setUpTableViewController: UIViewController {
                     Defined.ref.child("Table")
                     
                     Defined.ref.child("Table").child("\(numberCount)").updateChildValues(writeData) { (error, reference) in
+                        self.navigationController?.popViewController(animated: true)
                     }
                 }
-                
             })
-            let cancel = UIAlertAction(title: "Quay lại", style: .cancel) { (action) -> Void in
-                print("Cancel ")
+            let cancel = UIAlertAction(title: Constans.cancel, style: .cancel) { (action) -> Void in
             }
             dialogMessage.addAction(ok)
             dialogMessage.addAction(cancel)

@@ -20,13 +20,6 @@ class EmployeesCell: BaseTBCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func setUpData(data: Employees)  {
-        if data.sex == "nam" {
-            icon.image = UIImage(named: "nam")
-        }else{
-            icon.image = UIImage(named: "nu")
-        }
-        userName.text = data.name
-    }
+
     
 }
