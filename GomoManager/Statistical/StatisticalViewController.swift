@@ -16,6 +16,7 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var chartView: LineChartView!
     @IBOutlet weak var amountYear: UILabel!
     @IBOutlet weak var lblSelectYear: UILabel!
+    let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
     
     private var dataPicker: UIDatePicker?
     
@@ -31,22 +32,22 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
         getDataBill()
     }
     
-    @objc func dateChanged(_ sender: UIDatePicker) {
-        let components = Calendar.current.dateComponents([.year, .month, .day], from: sender.date)
-        if let day = components.day, let month = components.month, let year = components.year {
-            print("\(day) \(month) \(year)")
-        }
-    }
-    
     func setUpdata() {
         dataPicker = UIDatePicker()
         dataPicker?.datePickerMode = .date
         Defined.formatter.groupingSeparator = "."
         Defined.formatter.numberStyle = .decimal
+        let labelTap = UITapGestureRecognizer(target: self, action: #selector(self.labelTapped(_:)))
+                self.lblSelectYear.isUserInteractionEnabled = true
+                self.lblSelectYear.addGestureRecognizer(labelTap)
+       
     }
+    @objc func labelTapped(_ sender: UITapGestureRecognizer) {
+            print("labelTapped")
+        }
     
     func getDataBill(){
-        Defined.ref.child("Bill/Done").observe(DataEventType.value) { [self] (DataSnapshot) in
+        Defined.ref.child("Account").child(idAdmin ?? "").child("Bill/Done").observe(DataEventType.value) { [self] (DataSnapshot) in
             if let snapshort = DataSnapshot.children.allObjects as? [DataSnapshot]{
                 self.bills.removeAll()
                 self.totalYear = 0
@@ -97,11 +98,9 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
             let data: ChartDataEntry = ChartDataEntry(x: Double(i), y: Double(data[i]))
             lineData.append(data)
         }
-        
-        let lineDataSet = LineChartDataSet(entries: lineData ,label: "Doanh thu cửa hàng theo tháng đơn vị / triệu ")
+        let lineDataSet = LineChartDataSet(entries: lineData ,label: "Doanh thu cửa hàng theo tháng đơn vị /triệu ")
         let data = LineChartData(dataSet: lineDataSet)
         chartView.data = data
-        
     }
     
     func dateFormatTime(date : Date) -> String {

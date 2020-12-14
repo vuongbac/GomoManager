@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var btnAddFood: UIBarButtonItem!
     let searchController = UISearchController(searchResultsController: nil)
     
-    
+    let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
     var foods = [Food]()
     var status = ""
     var strFood = [Food]()
@@ -29,7 +29,6 @@ class ViewController: UIViewController {
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
-        
     }
     
     @IBAction func btnSelectMenu(_ sender: UISegmentedControl) {
@@ -48,9 +47,8 @@ class ViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    
     func getFoodsData(){
-        Defined.ref.child("Menu/Food").observe(DataEventType.value) { (DataSnapshot) in
+        Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Food").observe(DataEventType.value) { (DataSnapshot) in
             if let snapshort = DataSnapshot.children.allObjects as? [DataSnapshot]{
                 self.foods.removeAll()
                 for snap in snapshort {
@@ -71,9 +69,8 @@ class ViewController: UIViewController {
         }
     }
     
-    
     func getDrinkData(){
-        Defined.ref.child("Menu/Drink").observe(DataEventType.value) { (DataSnapshot) in
+        Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Drink").observe(DataEventType.value) { (DataSnapshot) in
             if let snapshort = DataSnapshot.children.allObjects as? [DataSnapshot]{
                 self.foods.removeAll()
                 for snap in snapshort {
@@ -119,7 +116,6 @@ extension ViewController:  UITableViewDelegate, UITableViewDataSource{
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
-
 
 extension ViewController: UISearchResultsUpdating{
     func updateSearchResults(for searchController: UISearchController) {

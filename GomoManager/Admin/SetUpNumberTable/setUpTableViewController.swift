@@ -10,6 +10,8 @@ import Firebase
 
 class setUpTableViewController: UIViewController {
     @IBOutlet weak var lblCountTable: UITextField!
+    let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
+
     var numberTable = 0
     var tables = [Table]()
     var updateTable = 0
@@ -20,7 +22,7 @@ class setUpTableViewController: UIViewController {
     }
     
     func getNumberTable(){
-        Defined.ref.child("Table").observe(DataEventType.value) { (DataSnapshot) in
+        Defined.ref.child("Account").child(idAdmin ?? "").child("Table").observe(DataEventType.value) { (DataSnapshot) in
             self.tables.removeAll()
             if let snapshort = DataSnapshot.children.allObjects as? [DataSnapshot]{
                 for snap in snapshort {
@@ -57,9 +59,9 @@ class setUpTableViewController: UIViewController {
                     let writeData: [String: Any] = [
                         "statu": 1,
                         "NumberTable": numberCount]
-                    Defined.ref.child("Table")
+                    Defined.ref.child("Account").child(self.idAdmin ?? "").child("Table")
                     
-                    Defined.ref.child("Table").child("\(numberCount)").updateChildValues(writeData) { (error, reference) in
+                    Defined.ref.child("Account").child(self.idAdmin ?? "").child("Table").child("\(numberCount)").updateChildValues(writeData) { (error, reference) in
                         self.navigationController?.popViewController(animated: true)
                     }
                 }

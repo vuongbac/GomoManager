@@ -17,6 +17,8 @@ class DetailFoodViewController: UIViewController {
     @IBOutlet weak var lblContent: UITextView!
     @IBOutlet weak var btnDelete: UIBarButtonItem!
     
+    let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
+
     var img: String = ""
     var name: String = ""
     var price: String = ""
@@ -25,11 +27,9 @@ class DetailFoodViewController: UIViewController {
     var statusMenu = ""
     var statusFood = "" 
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setData()
-
     }
     
     func setData(){
@@ -60,7 +60,7 @@ class DetailFoodViewController: UIViewController {
                                       style: .default,
                                       handler: { action in
                                         if self.statusMenu == "drink"{
-                                            Defined.ref.child("Menu/Drink/\(self.idFood)").removeValue { (error, reference) in
+                                            Defined.ref.child("Account").child(self.idAdmin ?? "").child("Menu/Drink/\(self.idFood)").removeValue { (error, reference) in
                                                 if error != nil {
                                                     print(error!)
                                                 } else {
@@ -68,7 +68,7 @@ class DetailFoodViewController: UIViewController {
                                                 }
                                             }
                                         }else{
-                                            Defined.ref.child("Menu/Food/\(self.idFood)").removeValue { (error, reference) in
+                                            Defined.ref.child("Account").child(self.idAdmin ?? "").child("Menu/Food/\(self.idFood)").removeValue { (error, reference) in
                                                 if error != nil {
                                                     print(error!)
                                                 } else {
@@ -97,17 +97,17 @@ class DetailFoodViewController: UIViewController {
         if sender.isOn{
             print("on")
             if statusMenu == "drink"{
-                Defined.ref.child("Menu/Drink").child(idFood).updateChildValues(["statusFood":"0"])
+                Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Drink").child(idFood).updateChildValues(["statusFood":"0"])
             }else{
-                Defined.ref.child("Menu/Food").child(idFood).updateChildValues(["statusFood":"0"])
+                Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Food").child(idFood).updateChildValues(["statusFood":"0"])
             }
             
         }else{
             print("off")
             if statusMenu == "drink"{
-                Defined.ref.child("Menu/Drink").child(idFood).updateChildValues(["statusFood":"1"])
+                Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Drink").child(idFood).updateChildValues(["statusFood":"1"])
             }else{
-                Defined.ref.child("Menu/Food").child(idFood).updateChildValues(["statusFood":"1"])
+                Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Food").child(idFood).updateChildValues(["statusFood":"1"])
             }
             
         }

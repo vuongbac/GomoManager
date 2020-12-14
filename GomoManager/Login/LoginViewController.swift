@@ -39,24 +39,22 @@ extension LoginViewController: GIDSignInDelegate{
             
             let avatar = pathString
             let email = user?.profile.email
+            let idAdmin = user.userID
             
             Defined.defaults.set(email, forKey: "email" )
             Defined.defaults.set(avatar, forKey: "avatar")
+            Defined.defaults.set(idAdmin, forKey: "idAdmin")
             
-            
-            let email1 = Defined.defaults.value(forKey: "email") as! String
 
             let profile = [
-                "avatar" : pathString,
+                "avatar" : avatar as Any,
                 "email" : user.profile.email as Any,
-                "balance" : 0
                 ] as [String : Any]
             
-            Defined.ref.child("Account").child("\(String(describing: user.userID))").setValue(profile,withCompletionBlock: { error , ref in
+            Defined.ref.child("Account").child(idAdmin ?? "").child("Profile").setValue(profile,withCompletionBlock: { error , ref in
                 if error == nil {
                     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
                     vc.modalPresentationStyle = .fullScreen
-                    print(email1)
                     self.present(vc, animated: true, completion: nil)
                 }
                 else {}

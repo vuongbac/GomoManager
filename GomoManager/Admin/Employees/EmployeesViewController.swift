@@ -12,6 +12,8 @@ class EmployeesViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     var employees = [Employees]()
+    let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
+
     override func viewDidLoad() {
         super.viewDidLoad()
         getDataEmployees()
@@ -19,7 +21,7 @@ class EmployeesViewController: UIViewController {
     }
     
     func getDataEmployees(){
-        Defined.ref.child("Employees").observe(DataEventType.value) { (DataSnapshot) in
+        Defined.ref.child("Account").child(idAdmin ?? "").child("Employees").observe(DataEventType.value) { (DataSnapshot) in
             if let snapshort = DataSnapshot.children.allObjects as? [DataSnapshot]{
                 self.employees.removeAll()
                 for snap in snapshort {

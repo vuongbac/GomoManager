@@ -20,6 +20,8 @@ class AddEmployeesViewController: UIViewController {
     @IBOutlet weak var txtAdd: UITextField!
     @IBOutlet weak var selectGender: UISegmentedControl!
     var ImagePicker = UIImagePickerController()
+    let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
+
     
     
     override func viewDidLoad() {
@@ -91,7 +93,7 @@ class AddEmployeesViewController: UIViewController {
                 if let email = txtEmail.text, let password = txtPassword.text{
                     Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                         if authResult != nil{
-                            Defined.ref.child("Employees").child("\(em ?? "")").setValue(writeData)
+                            Defined.ref.child("Account").child(idAdmin ?? "").child("Employees").child("\(em ?? "")").setValue(writeData)
                             self.navigationController?.popViewController(animated: true)
                         }else{
                             if let user = Auth.auth().currentUser {

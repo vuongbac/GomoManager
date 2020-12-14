@@ -22,20 +22,19 @@ class AdminViewController: UIViewController {
     
     let email = Defined.defaults.value(forKey: "email") as? String
     let avatar = Defined.defaults.value(forKey: "avatar") as? String
+    let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nameAdmin.text = email
         AdminCell.registerCellByNib(tableView)
         setUp()
-        print("bacnn\(String(avatar ?? ""))")
     }
     
     func setUp()  {
         nameAdmin.text = email
         avatarAdmin.layer.cornerRadius = 50
         avatarAdmin.sd_setImage(with: URL(string: "https://lh3.googleusercontent.com\(String(avatar ?? ""))"), completed: nil)
-        print(avatar)
     }
     
 }

@@ -12,19 +12,14 @@ class BillViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmented: UISegmentedControl!
+    let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
+
     
     var bills = [Bill]()
     override func viewDidLoad() {
         super.viewDidLoad()
         BillCell.registerCellByNib(tableView)
         getBillPresent()
-        for numberCount in 1...7 {
-            
-            let writeData: [String: Any] = [
-                "statu": 1,
-                "NumberTable": numberCount]
-                Defined.ref.child("Table").child("\(numberCount)").setValue(writeData)
-        }
     }
     
    
@@ -38,7 +33,7 @@ class BillViewController: UIViewController {
     
     
     func getBillDone(){
-        Defined.ref.child("Bill/Done").observe(DataEventType.value) { (DataSnapshot) in
+        Defined.ref.child("Account").child(idAdmin ?? "").child("Bill/Done").observe(DataEventType.value) { (DataSnapshot) in
             if let snapshort = DataSnapshot.children.allObjects as? [DataSnapshot]{
                 self.bills.removeAll()
                 for snap in snapshort {
@@ -60,7 +55,7 @@ class BillViewController: UIViewController {
     
     
     func getBillPresent(){
-        Defined.ref.child("Bill/Present").observe(DataEventType.value) { (DataSnapshot) in
+        Defined.ref.child("Account").child(idAdmin ?? "").child("Bill/Present").observe(DataEventType.value) { (DataSnapshot) in
             if let snapshort = DataSnapshot.children.allObjects as? [DataSnapshot]{
                 self.bills.removeAll()
                 for snap in snapshort {

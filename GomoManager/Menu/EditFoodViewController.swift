@@ -14,6 +14,7 @@ class EditFoodViewController: UIViewController {
     @IBOutlet weak var txtNameFood: UITextField!
     @IBOutlet weak var txtPriceFood: UITextField!
     @IBOutlet weak var imageFood: UIImageView!
+    let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
     
     var imagePicker = UIImagePickerController()
     var img: String = ""
@@ -63,10 +64,10 @@ class EditFoodViewController: UIViewController {
                     "imagefood":"\(url)"]
             
                 if statusMenu == "drink"{
-                    Defined.ref.child("Menu/Drink").child("/\(idFood)").updateChildValues(writeData) { (error, reference) in
+                    Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Drink").child("/\(idFood)").updateChildValues(writeData) { (error, reference) in
                     }
                 }else{
-                    Defined.ref.child("Menu/Food").child("/\(idFood)").updateChildValues(writeData) { (error, reference) in
+                    Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Food").child("/\(idFood)").updateChildValues(writeData) { (error, reference) in
                     }
                 }
             })

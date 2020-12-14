@@ -15,6 +15,7 @@ class AddMenuViewController: UIViewController {
     @IBOutlet weak var txtContent: UITextView!
     @IBOutlet weak var tbnAdd: UIButton!
     
+    let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
     var imagePicker = UIImagePickerController()
     var price = 0
     var statusMenu = ""
@@ -56,9 +57,9 @@ class AddMenuViewController: UIViewController {
                     "statusFood":"1",
                     "imagefood":"\(url)"]
                 if statusMenu == "drink"{
-                    Defined.ref.child("Menu/Drink").child(self.txtNameFood.text!).setValue(writeData)
+                    Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Drink").child(self.txtNameFood.text!).setValue(writeData)
                 }else{
-                    Defined.ref.child("Menu/Food").childByAutoId().setValue(writeData)
+                    Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Food").child(self.txtNameFood.text!).setValue(writeData)
                 }
                
             })
@@ -69,12 +70,6 @@ class AddMenuViewController: UIViewController {
     @IBAction func btnAddFood(_ sender: Any) {
         addDataMenu()
     }
-    
-//    func checkValidate() {
-//        var name = txtNameFood.text
-//        var price = txtPriceFood.text
-//        var content = txtContent.text
-//    }
 }
 
 extension AddMenuViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate{
