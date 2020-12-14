@@ -12,10 +12,9 @@ import Firebase
 class StatisticalViewController: UIViewController, ChartViewDelegate {
     
     @IBOutlet weak var amountDay: UILabel!
-    @IBOutlet weak var txtDate: UILabel!
     @IBOutlet weak var chartView: LineChartView!
     @IBOutlet weak var amountYear: UILabel!
-    @IBOutlet weak var lblSelectYear: UILabel!
+    @IBOutlet weak var txtSelectYear: UITextField!
     let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
     
     private var dataPicker: UIDatePicker?
@@ -35,16 +34,22 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
     func setUpdata() {
         dataPicker = UIDatePicker()
         dataPicker?.datePickerMode = .date
+        dataPicker?.preferredDatePickerStyle = .wheels
+        txtSelectYear.inputView = dataPicker
+        dataPicker?.addTarget(self, action: #selector(dataChange(dataPicker:)), for: .valueChanged)
+
         Defined.formatter.groupingSeparator = "."
         Defined.formatter.numberStyle = .decimal
-        let labelTap = UITapGestureRecognizer(target: self, action: #selector(self.labelTapped(_:)))
-                self.lblSelectYear.isUserInteractionEnabled = true
-                self.lblSelectYear.addGestureRecognizer(labelTap)
+//        let labelTap = UITapGestureRecognizer(target: self, action: #selector(self.labelTapped(_:)))
+//                self.txtSelectYear.isUserInteractionEnabled = true
+//                self.txtSelectYear.addGestureRecognizer(labelTap)
        
     }
-    @objc func labelTapped(_ sender: UITapGestureRecognizer) {
-            print("labelTapped")
-        }
+    
+    @objc func dataChange(dataPicker : UIDatePicker){
+        txtSelectYear.text = dateFormatTime(date: dataPicker.date)
+        view.endEditing(true)
+    }
     
     func getDataBill(){
         Defined.ref.child("Account").child(idAdmin ?? "").child("Bill/Done").observe(DataEventType.value) { [self] (DataSnapshot) in
@@ -60,10 +65,10 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
                         let detilbill = value["detilbill"] as? String
                         let numbertable = value["numbertable"] as? String
                         let total = value["total"] as! Int
-                        print(total)
                         
                         let bill = Bill(id: id, numberTable: numbertable, detailFood: detilbill, total: total, date: date)
                         self.bills.append(bill)
+                        
                         let tempDate = date.split(separator: "/")
                         // lấy tổng doanh thu ngày hiên tại
                         
@@ -105,7 +110,7 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
     
     func dateFormatTime(date : Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
+        dateFormatter.dateFormat = "yyyy"
         return dateFormatter.string(from: date)
     }
 }
