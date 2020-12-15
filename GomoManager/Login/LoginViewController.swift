@@ -44,8 +44,7 @@ extension LoginViewController: GIDSignInDelegate{
             Defined.defaults.set(email, forKey: "email" )
             Defined.defaults.set(avatar, forKey: "avatar")
             Defined.defaults.set(idAdmin, forKey: "idAdmin")
-            
-
+        
             let profile = [
                 "avatar" : avatar as Any,
                 "email" : user.profile.email as Any,
@@ -59,7 +58,6 @@ extension LoginViewController: GIDSignInDelegate{
                 }
                 else {}
             })
-            
         }else{
             print(error as Any)
         }

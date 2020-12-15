@@ -37,7 +37,6 @@ class EditFoodViewController: UIViewController {
         imageFood.sd_setImage(with: URL(string: img), completed: nil)
         txtPriceFood.text = price
         txtDescribeFood.text = content
-        print(idFood)
     }
     
     @IBAction func btnSave(_ sender: Any) {
@@ -50,7 +49,6 @@ class EditFoodViewController: UIViewController {
         }
         Defined.storage.child("images/\(txtNameFood.text ?? "").png").putData(imageData, metadata: nil, completion: { [self] _, error in
             guard error == nil else {
-                print("failed to upload")
                 return
             }
             Defined.storage.child("images/\(txtNameFood.text ?? "").png").downloadURL(completion: { url, error in

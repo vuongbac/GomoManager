@@ -40,10 +40,6 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
 
         Defined.formatter.groupingSeparator = "."
         Defined.formatter.numberStyle = .decimal
-//        let labelTap = UITapGestureRecognizer(target: self, action: #selector(self.labelTapped(_:)))
-//                self.txtSelectYear.isUserInteractionEnabled = true
-//                self.txtSelectYear.addGestureRecognizer(labelTap)
-       
     }
     
     @objc func dataChange(dataPicker : UIDatePicker){
