@@ -48,27 +48,28 @@ class EditFoodViewController: UIViewController {
         guard let imageData  = imageFood.image?.pngData() else{
             return
         }
-        Defined.storage.child("images/\(txtNameFood.text).png").putData(imageData, metadata: nil, completion: { [self] _, error in
+        Defined.storage.child("images/\(txtNameFood.text ?? "").png").putData(imageData, metadata: nil, completion: { [self] _, error in
             guard error == nil else {
                 print("failed to upload")
                 return
             }
-            Defined.storage.child("images/\(txtNameFood.text).png").downloadURL(completion: { url, error in
+            Defined.storage.child("images/\(txtNameFood.text ?? "").png").downloadURL(completion: { url, error in
                 guard let url = url, error == nil else {
                     return
                 }
                 let writeData: [String: Any] = [
-                    "namefood": txtNameFood.text,
-                    "notefood": txtDescribeFood.text,
+                    "namefood": txtNameFood.text ?? "",
+                    "notefood": txtDescribeFood.text ?? "",
                     "price" : self.prices,
                     "imagefood":"\(url)"]
-            
-                if statusMenu == "drink"{
-                    Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Drink").child("/\(idFood)").updateChildValues(writeData) { (error, reference) in
-                    }
-                }else{
-                    Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Food").child("/\(idFood)").updateChildValues(writeData) { (error, reference) in
-                    }
+                
+                switch statusMenu{
+                case "drink":
+                    Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Drink").child("/\(idFood)").updateChildValues(writeData) { (error, reference) in }
+                case "food":
+                    Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Food").child("/\(idFood)").updateChildValues(writeData) { (error, reference) in }
+                default:
+                    Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Other").child("/\(idFood)").updateChildValues(writeData) { (error, reference) in }
                 }
             })
         })

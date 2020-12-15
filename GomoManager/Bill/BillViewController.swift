@@ -14,23 +14,25 @@ class BillViewController: UIViewController {
     @IBOutlet weak var segmented: UISegmentedControl!
     let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
 
-    
     var bills = [Bill]()
+    var status = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         BillCell.registerCellByNib(tableView)
         getBillPresent()
+        status = "0"
     }
     
-   
     @IBAction func btnSelectBill(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0{
             getBillPresent()
+            status = "0"
         }else{
             getBillDone()
+            status = "1"
         }
     }
-    
     
     func getBillDone(){
         Defined.ref.child("Account").child(idAdmin ?? "").child("Bill/Done").observe(DataEventType.value) { (DataSnapshot) in
@@ -41,18 +43,18 @@ class BillViewController: UIViewController {
                     if let value = snap.value as? [String: Any] {
                         let date = value["date"] as! String
                         let detilbill = value["detilbill"] as! String
+                        let listpricefood = value["listpricefood"] as? String
                         let numbertable = value["numbertable"] as! String
                         let total = value["total"] as! Int
-                        let bill = Bill(id: id,numberTable: numbertable, detailFood: detilbill, total: total, date: date)
+                        let time = value["time"] as? String
+                        let bill = Bill(id: id,numberTable: numbertable, detailFood: detilbill, Total: total, date: date, time: time,listpricefood: listpricefood)
                         self.bills.append(bill)
                     }
                 }
             }
             self.tableView.reloadData()
-
         }
     }
-    
     
     func getBillPresent(){
         Defined.ref.child("Account").child(idAdmin ?? "").child("Bill/Present").observe(DataEventType.value) { (DataSnapshot) in
@@ -64,16 +66,18 @@ class BillViewController: UIViewController {
                         let date = value["date"] as! String
                         let detilbill = value["detilbill"] as! String
                         let numbertable = value["numbertable"] as! String
+                        let listpricefood = value["listpricefood"] as? String
                         let total = value["total"] as! Int
-                        let bill = Bill(id: id,numberTable: numbertable, detailFood: detilbill, total: total, date: date)
+                        let time = value["time"] as! String
+                        let bill = Bill(id: id,numberTable: numbertable, detailFood: detilbill, Total: total, date: date ,time: time,listpricefood: listpricefood)
                         self.bills.append(bill)
                     }
                 }
             }
             self.tableView.reloadData()
-
         }
     }
+    
     
 }
 extension BillViewController: UITableViewDelegate, UITableViewDataSource{
@@ -89,9 +93,14 @@ extension BillViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailBillViewController") as! DetailBillViewController
-        vc.modalPresentationStyle = .fullScreen
-        vc.modalTransitionStyle = .crossDissolve
-        vc.modalPresentationStyle = .overCurrentContext
+        let detailBill = bills[indexPath.row]
+        vc.amount = detailBill.Total ?? 0
+        vc.detailFood = detailBill.detailFood ?? ""
+        vc.date = detailBill.date ?? ""
+        vc.time = detailBill.time ?? ""
+        vc.numberTb = detailBill.id ?? ""
+        vc.status = status
+        vc.listpricefood = detailBill.listpricefood ?? ""
         self.present(vc, animated: true, completion: nil)
     }
 }

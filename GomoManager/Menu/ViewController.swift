@@ -32,12 +32,17 @@ class ViewController: UIViewController {
     }
     
     @IBAction func btnSelectMenu(_ sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
+
+        switch sender.selectedSegmentIndex {
+        case 0:
             getFoodsData()
             status = "food"
-        }else{
+        case 1:
             getDrinkData()
             status = "drink"
+        default:
+            getOtherData()
+            status = "other"
         }
     }
     
@@ -49,6 +54,29 @@ class ViewController: UIViewController {
     
     func getFoodsData(){
         Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Food").observe(DataEventType.value) { (DataSnapshot) in
+            if let snapshort = DataSnapshot.children.allObjects as? [DataSnapshot]{
+                self.foods.removeAll()
+                for snap in snapshort {
+                    let id = snap.key
+                    if let value = snap.value as? [String: Any] {
+                        let namefood = value["namefood"] as! String
+                        let imagefood = value["imagefood"] as! String
+                        let notefood = value["notefood"] as! String
+                        let pricefood = value["price"] as! Int
+                        let statusFood = value["statusFood"] as? String
+                        let food = Food(id: id, name: namefood, price: pricefood, image: imagefood, note: notefood ,statusFood: statusFood)
+                        self.foods.append(food)
+                    }
+                }
+            }
+            self.strFood = self.foods
+            self.tableView.reloadData()
+        }
+    }
+    
+    
+    func getOtherData(){
+        Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Other").observe(DataEventType.value) { (DataSnapshot) in
             if let snapshort = DataSnapshot.children.allObjects as? [DataSnapshot]{
                 self.foods.removeAll()
                 for snap in snapshort {

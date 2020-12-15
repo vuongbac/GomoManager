@@ -55,7 +55,7 @@ extension StatusTableViewController: UICollectionViewDelegate, UICollectionViewD
         case 1:
             cell.subView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         default:
-            cell.subView.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+            cell.subView.backgroundColor = #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1)
         }
         return cell
     }

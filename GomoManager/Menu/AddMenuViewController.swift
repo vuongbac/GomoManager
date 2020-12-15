@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class AddMenuViewController: UIViewController {
 
@@ -17,16 +18,19 @@ class AddMenuViewController: UIViewController {
     
     let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
     var imagePicker = UIImagePickerController()
+    var foods = [Food]()
     var price = 0
     var statusMenu = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      
         imagePicker.delegate = self
         tbnAdd.layer.borderWidth = 0.5
         tbnAdd.layer.cornerRadius = 25
         imageFood.alpha = 0.9
     }
+    
     @IBAction func tbnSelectImage(_ sender: Any) {
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
@@ -56,12 +60,15 @@ class AddMenuViewController: UIViewController {
                     "price" : self.price,
                     "statusFood":"1",
                     "imagefood":"\(url)"]
-                if statusMenu == "drink"{
+                switch statusMenu {
+                case "drink":
                     Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Drink").child(self.txtNameFood.text!).setValue(writeData)
-                }else{
+                case "food":
                     Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Food").child(self.txtNameFood.text!).setValue(writeData)
+                default:
+                    Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Other").child(self.txtNameFood.text!).setValue(writeData)
                 }
-               
+
             })
         })
         self.navigationController?.popViewController(animated: true)

@@ -50,6 +50,8 @@
 		5ECAFB8825733D510055672E /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFB8625733D510055672E /* MenuCell.swift */; };
 		5ECAFB8925733D510055672E /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ECAFB8725733D510055672E /* MenuCell.xib */; };
 		5EE4EF01257561D500E04369 /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE4EF00257561D500E04369 /* Table.swift */; };
+		98DB8599258891E2007C58BC /* DetailFoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DB8597258891E2007C58BC /* DetailFoodCell.swift */; };
+		98DB859A258891E2007C58BC /* DetailFoodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98DB8598258891E2007C58BC /* DetailFoodCell.xib */; };
 		FF39EC25C7CCC634C77EDEF3 /* Pods_GomoManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4DA176368D6F3F6914BF2EB /* Pods_GomoManager.framework */; };
 /* End PBXBuildFile section */
 
@@ -120,6 +122,8 @@
 		5ECAFB8625733D510055672E /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		5ECAFB8725733D510055672E /* MenuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
 		5EE4EF00257561D500E04369 /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
+		98DB8597258891E2007C58BC /* DetailFoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFoodCell.swift; sourceTree = "<group>"; };
+		98DB8598258891E2007C58BC /* DetailFoodCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailFoodCell.xib; sourceTree = "<group>"; };
 		9ECB50927A215826654E9EB6 /* Pods-GomoManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GomoManager.debug.xcconfig"; path = "Target Support Files/Pods-GomoManager/Pods-GomoManager.debug.xcconfig"; sourceTree = "<group>"; };
 		C63C3506A8960D0FD37C8CD3 /* Pods-GomoManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GomoManager.release.xcconfig"; path = "Target Support Files/Pods-GomoManager/Pods-GomoManager.release.xcconfig"; sourceTree = "<group>"; };
 		D4DA176368D6F3F6914BF2EB /* Pods_GomoManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GomoManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -272,6 +276,8 @@
 			children = (
 				5ECAFB7E25733CA60055672E /* BillCell.swift */,
 				5ECAFB7F25733CA60055672E /* BillCell.xib */,
+				98DB8597258891E2007C58BC /* DetailFoodCell.swift */,
+				98DB8598258891E2007C58BC /* DetailFoodCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -500,6 +506,7 @@
 				5ECAFB7A25733C5E0055672E /* EmployeesCell.xib in Resources */,
 				5ECAFAA3257334C80055672E /* Assets.xcassets in Resources */,
 				5EAA986625828762004FB209 /* TableCCell.xib in Resources */,
+				98DB859A258891E2007C58BC /* DetailFoodCell.xib in Resources */,
 				5ECAFAA1257334C50055672E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -594,6 +601,7 @@
 				5ECAFA9A257334C50055672E /* AppDelegate.swift in Sources */,
 				5ECAFB0B2573397A0055672E /* Defined.swift in Sources */,
 				5ECAFB2C25733A170055672E /* BillViewController.swift in Sources */,
+				98DB8599258891E2007C58BC /* DetailFoodCell.swift in Sources */,
 				5EAA985E258286DB004FB209 /* StatusTableViewController.swift in Sources */,
 				5ECAFAFD2573392F0055672E /* BaseCLCell.swift in Sources */,
 				5ECAFB13257339920055672E /* Food.swift in Sources */,

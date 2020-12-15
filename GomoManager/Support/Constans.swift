@@ -12,10 +12,6 @@ class Constans {
     static let cancel = "Đóng"
     static let message1 = "Vẫn còn bàn đang hoạt động chưa thể đặt lại số bàn"
     static let message2 = "Bạn có muốn thay đổi số bàn hiện tại trong quán không?"
-   
-    
-    
-
-
+    static let deleteFood = "Xoá đồ ăn khỏi menu"
 
 }

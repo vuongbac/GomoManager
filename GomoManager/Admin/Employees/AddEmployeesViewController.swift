@@ -12,6 +12,7 @@ import FirebaseAuth
 class AddEmployeesViewController: UIViewController {
     
     @IBOutlet weak var avatar: UIImageView!
+    @IBOutlet weak var subView: UIView!
     @IBOutlet weak var btnAdd: UIButton!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
@@ -19,20 +20,23 @@ class AddEmployeesViewController: UIViewController {
     @IBOutlet weak var txtBirthday: UITextField!
     @IBOutlet weak var txtAdd: UITextField!
     @IBOutlet weak var selectGender: UISegmentedControl!
+    @IBOutlet weak var txtPhone: UITextField!
+    
     var ImagePicker = UIImagePickerController()
     let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
+    var gender = ""
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
     }
     
     func setUp(){
+        gender = "Nữ"
         ImagePicker.delegate = self
         btnAdd.layer.cornerRadius = 7
         avatar.layer.cornerRadius = 50
+        subView.layer.cornerRadius = 20
         avatar.layer.borderWidth = 1
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         avatar.isUserInteractionEnabled = true
@@ -43,7 +47,6 @@ class AddEmployeesViewController: UIViewController {
         ImagePicker.allowsEditing = false
         ImagePicker.sourceType = .photoLibrary
         self.present(ImagePicker, animated: true, completion: nil)
-        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -58,11 +61,17 @@ class AddEmployeesViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    
     @IBAction func btnAddEmploys(_ sender: Any) {
         addDataEmployees()
     }
     
+    @IBAction func btnSelectGender(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            gender = "name"
+        }else{
+            gender = "nữ"
+        }
+    }
     
     func addDataEmployees(){
         let cutEmail = txtEmail.text
@@ -74,19 +83,19 @@ class AddEmployeesViewController: UIViewController {
         }
         Defined.storage.child("images/\(txtName.text ?? "").png").putData(imageData, metadata: nil, completion: { [self] _, error in
             guard error == nil else {
-                print("failed to upload")
                 return
             }
             Defined.storage.child("images/\(txtName.text ?? "").png").downloadURL(completion: { url, error in
                 guard let url = url, error == nil else {
                     return
                 }
-                
                 let writeData: [String: Any] = [
                     "email": txtEmail.text ?? "",
                     "password": txtPassword.text ?? "",
                     "name": txtName.text ?? "",
                     "birthday": txtBirthday.text ?? "",
+                    "gender": gender,
+                    "phone": txtPhone.text ?? "",
                     "avatar": "\(url)",
                     "address": txtAdd.text ?? ""]
                 
@@ -104,7 +113,6 @@ class AddEmployeesViewController: UIViewController {
                         }
                     }
                 }
-                
             })
         })
         self.navigationController?.popViewController(animated: true)

@@ -66,7 +66,7 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
                         let numbertable = value["numbertable"] as? String
                         let total = value["total"] as! Int
                         
-                        let bill = Bill(id: id, numberTable: numbertable, detailFood: detilbill, total: total, date: date)
+                        let bill = Bill(id: id, numberTable: numbertable, detailFood: detilbill, Total: total, date: date)
                         self.bills.append(bill)
                         
                         let tempDate = date.split(separator: "/")

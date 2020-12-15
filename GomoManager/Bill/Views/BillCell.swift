@@ -25,7 +25,7 @@ class BillCell: BaseTBCell {
     func setUpData(data: Bill){
         lblDate.text =  "Ngày: " + data.date!
         lblTable.text = "Bàn số: " + data.numberTable!
-        lblPrice.text = String( data.total ?? 0) + " VNĐ"
+        lblPrice.text = String( data.Total ?? 0) + " VNĐ"
     }
     
 }

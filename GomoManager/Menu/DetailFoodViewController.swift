@@ -18,7 +18,7 @@ class DetailFoodViewController: UIViewController {
     @IBOutlet weak var btnDelete: UIBarButtonItem!
     
     let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
-
+    
     var img: String = ""
     var name: String = ""
     var price: String = ""
@@ -26,7 +26,7 @@ class DetailFoodViewController: UIViewController {
     var idFood: String = ""
     var statusMenu = ""
     var statusFood = "" 
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setData()
@@ -50,31 +50,26 @@ class DetailFoodViewController: UIViewController {
     }
     
     @IBAction func btnDeleteFood(_ sender: Any) {
-        let alert = UIAlertController(title: "Delete Food",
-                                      message: "Are you sure to delete this Food?",
+        let alert = UIAlertController(title: Constans.title,
+                                      message: Constans.deleteFood,
                                       preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Cancel",
+        alert.addAction(UIAlertAction(title: Constans.cancel,
                                       style: .cancel,
                                       handler: nil))
-        alert.addAction(UIAlertAction(title: "Yes",
+        alert.addAction(UIAlertAction(title: Constans.ok,
                                       style: .default,
                                       handler: { action in
-                                        if self.statusMenu == "drink"{
-                                            Defined.ref.child("Account").child(self.idAdmin ?? "").child("Menu/Drink/\(self.idFood)").removeValue { (error, reference) in
-                                                if error != nil {
-                                                    print(error!)
-                                                } else {
-                                                    self.navigationController?.popViewController(animated: true)
-                                                }
-                                            }
-                                        }else{
-                                            Defined.ref.child("Account").child(self.idAdmin ?? "").child("Menu/Food/\(self.idFood)").removeValue { (error, reference) in
-                                                if error != nil {
-                                                    print(error!)
-                                                } else {
-                                                    self.navigationController?.popViewController(animated: true)
-                                                }
-                                            }
+                                        
+                                        switch self.statusMenu {
+                                        case "drink":
+                                            Defined.ref.child("Account").child(self.idAdmin ?? "").child("Menu/Drink/\(self.idFood)").removeValue { (error, reference) in}
+                                            self.navigationController?.popViewController(animated: true)
+                                        case "food":
+                                            Defined.ref.child("Account").child(self.idAdmin ?? "").child("Menu/Food/\(self.idFood)").removeValue { (error, reference) in}
+                                            self.navigationController?.popViewController(animated: true)
+                                        default:
+                                            Defined.ref.child("Account").child(self.idAdmin ?? "").child("Menu/Other/\(self.idFood)").removeValue { (error, reference) in}
+                                            self.navigationController?.popViewController(animated: true)
                                         }
                                       }))
         self.present(alert, animated: true)
@@ -83,7 +78,7 @@ class DetailFoodViewController: UIViewController {
     @IBAction func btnEditFood(_ sender: Any) {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EditFoodViewController") as! EditFoodViewController
         vc.img = img
-        vc.idFood = idFood 
+        vc.idFood = idFood
         vc.name = name
         vc.content = content
         vc.idFood = idFood
@@ -96,18 +91,23 @@ class DetailFoodViewController: UIViewController {
     @IBAction func btnStatusFood(_ sender: UISwitch) {
         if sender.isOn{
             print("on")
-            if statusMenu == "drink"{
+            switch statusMenu {
+            case "drink":
                 Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Drink").child(idFood).updateChildValues(["statusFood":"0"])
-            }else{
+            case "food":
                 Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Food").child(idFood).updateChildValues(["statusFood":"0"])
+            default:
+                Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Other").child(idFood).updateChildValues(["statusFood":"0"])
             }
-            
         }else{
             print("off")
-            if statusMenu == "drink"{
+            switch statusMenu {
+            case "drink":
                 Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Drink").child(idFood).updateChildValues(["statusFood":"1"])
-            }else{
+            case "food":
                 Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Food").child(idFood).updateChildValues(["statusFood":"1"])
+            default:
+                Defined.ref.child("Account").child(idAdmin ?? "").child("Menu/Other").child(idFood).updateChildValues(["statusFood":"1"])
             }
             
         }

@@ -1,37 +1,54 @@
 //
 //  DetailBillViewController.swift
-//  GomoAdmin
+//  Gomo
 //
-//  Created by BAC Vuong Toan (VTI.Intern) on 10/19/20.
+//  Created by Vương Toàn Bắc on 11/12/20.
 //
 
 import UIKit
-import Firebase
+import  Firebase
 
 class DetailBillViewController: UIViewController {
     
-
-    @IBOutlet weak var numberTable: UILabel!
-    @IBOutlet weak var lblDate: UILabel!
-    @IBOutlet weak var lblPrice: UILabel!
-    @IBOutlet weak var lblListFood: UILabel!
-    @IBOutlet weak var lblEmploysPay: UILabel!
+    @IBOutlet weak var txtTruTien: UITextField!
+    @IBOutlet weak var txtChiecKhau: UITextField!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var lblCollector: UILabel!
     @IBOutlet weak var subView: UIView!
+    @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var btnPay1: UIButton!
+    @IBOutlet weak var lblAmount: UILabel!
+    @IBOutlet weak var numberTable: UILabel!
+    @IBOutlet weak var lblTotalPay: UILabel!
+    @IBOutlet weak var lblNote: UITextField!
+    
+    let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
+    var listFood:[String] = []
+    var listPrice:[Int] = []
+    var select: String?
+    var phamTram = ["0","5","10","15","20","25","30","35","40","45","50"]
+
     
     var detailFood = ""
     var amount = 0
+    var discount = 0
+    var totalPayInDiscount = 0
+    var totalPay = 0
     var date = ""
     var numberTb = ""
     var status = ""
     var time = ""
+    var listpricefood = ""
+    var moneyMinus = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createPickerView()
+        dismissPickerView()
         customView()
         setDataBill()
-        getDataBill()
         setUp()
+        print("backol\(date)")
     }
     
     func customView(){
@@ -43,42 +60,62 @@ class DetailBillViewController: UIViewController {
     }
     
     func setUp(){
+        DetailFoodCell.registerCellByNib(tableView)
         Defined.formatter.groupingSeparator = "."
         Defined.formatter.numberStyle = .decimal
+        lblCollector.text = Defined.defaults.value(forKey: "name") as? String
+        let tempfood = self.detailFood.split{$0 == "/"}.map(String.init)
+        let tempPrice = self.listpricefood.split{$0 == "/"}.map(String.init)
+        
+        for i in 0..<tempfood.count{
+            self.listFood.append(tempfood[i])
+        }
+        for i in 0..<tempPrice.count{
+            self.listPrice.append(Int(tempPrice[i]) ?? 0)
+        }
+        let total = listPrice.reduce(0, +)
+        lblTotalPay.text = "\(Defined.formatter.string(from: NSNumber(value: total ))!)" + " VNĐ"
+        lblAmount.text = "\(Defined.formatter.string(from: NSNumber(value: total ))!)" + " VNĐ"
+        lblDate.text = time
+        numberTable.text = "Bàn số: \(numberTb)"
+        totalPayInDiscount = total - moneyMinus
     }
     
     func setDataBill() {
         if status == "1"{
             btnPay1.isEnabled = false
+            txtTruTien.isEnabled = false
+            txtChiecKhau.isEnabled = false
         }else{
-           btnPay1.isEnabled = true
+            btnPay1.isEnabled = true
         }
-        lblListFood.text = detailFood
-        lblPrice.text = "\(Defined.formatter.string(from: NSNumber(value: amount ))!)" + " VNĐ"
-        lblDate.text = date
-        numberTable.text = "Bàn số: \(numberTb)"
+        
+    }
+    func billDone(){
+        let total = listPrice.reduce(0, +)
+        let billDone = [
+            "detilbill": detailFood ,
+            "othermoney": txtTruTien.text ?? "" ,
+            "listpricefood": listpricefood ,
+            "total": total,
+            "discount": txtChiecKhau.text ?? "",
+            "time":time,
+            "date":date,
+            "note":lblNote.text ?? "",
+            "totalpay": lblTotalPay.text ?? "",
+            "numbertable":numberTb,] as [String: Any]
+        Defined.ref.child("Account").child(self.idAdmin ?? "").child("Bill/Done").childByAutoId().setValue(billDone)
     }
     
     
-    func getDataBill(){
-        Defined.ref.child("Bill/Present").observe(DataEventType.value) { [self] (DataSnapshot) in
-            if let snapshort = DataSnapshot.children.allObjects as? [DataSnapshot]{
-                
-                for snap in snapshort {
-                    let id = snap.key
-                    if let value = snap.value as? [String: Any] {
-                        let detilbill = value["detilbill"] as! String
-                        let total = value["total"] as! Int
-                        let date = value["date"] as! String
-                        let time = value["time"] as! String
-                        
-                        if id == self.numberTb{
-                            self.lblListFood.text = detilbill
-                            self.lblDate.text = time
-                            self.lblPrice.text = "\(Defined.formatter.string(from: NSNumber(value: total ))!)" + " VNĐ"
-                        }
-                    }
-                }
+    func billPay()  {
+        Defined.ref.child("Account").child(self.idAdmin ?? "").child("Bill/Present/\(Int(self.numberTb) ?? 0)").removeValue { (error, reference) in
+            if error != nil {
+                print("Error: \(error!)")
+            } else {
+                Defined.ref.child("Account").child(self.idAdmin ?? "").child("Table").child(self.numberTb).child("ListFood").removeValue()
+                Defined.ref.child("Account").child(self.idAdmin ?? "").child("Table/\(Int(self.numberTb) ?? 0)").updateChildValues(["statu": 1])
+                self.dismiss(animated: true, completion: nil)
             }
         }
     }
@@ -86,6 +123,27 @@ class DetailBillViewController: UIViewController {
     @IBAction func btnBack(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func btnPay(_ sender: Any) {
+        billDone()
+        billPay()
+    }
+    
+    @IBAction func changePrice(_ sender: UITextField) {
+        let total = listPrice.reduce(0, +)
+        if let strAmount = txtTruTien.text,
+           let intAmount = Int(strAmount){
+            moneyMinus = intAmount
+        }
+            if moneyMinus > total{
+              //  self.showDialog(title: Constans.notification, message: Constans.pay)
+            }else{
+                totalPayInDiscount = total - moneyMinus
+                lblTotalPay.text = "\(Defined.formatter.string(from: NSNumber(value: totalPayInDiscount))!)" + " VNĐ"
+            }
+        
+    }
+    
     
     @IBAction func btnScanBill(_ sender: Any) {
         let printController = UIPrintInteractionController.shared
@@ -97,40 +155,95 @@ class DetailBillViewController: UIViewController {
         printController.present(animated: true, completionHandler: nil)
     }
     
-    @IBAction func btnPay(_ sender: Any) {
+    func showDialog(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                                        switch action.style{
+                                        case .default: break
+                                        case .cancel: break
+                                        case .destructive: break
+                                        }}))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    // tạo Pickerview
+    func createPickerView() {
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
+        txtChiecKhau.inputView = pickerView
+    }
+    func dismissPickerView() {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let button = UIBarButtonItem(
+            title: "OK",
+            style: .plain,
+            target: self,
+            action: #selector(action(sender:))
+        )
+        toolBar.setItems([button], animated: true)
+        toolBar.isUserInteractionEnabled = true
+        txtChiecKhau.inputAccessoryView = toolBar
         
     }
-    
-    func billDone(){
-        let billDone = [
-            "detilbill": detailFood ,
-            "total": amount,
-            "date":date,
-            "time": time,
-            "numbertable":numberTb,] as [String: Any]
-        Defined.ref.child("Bill/Done").childByAutoId().setValue(billDone)
-    }
-    
-    func billPay()  {
-        Defined.ref.child("Bill/Present/\(Int(self.numberTb) ?? 0)").removeValue { (error, reference) in
-            if error != nil {
-                print("Error: \(error!)")
-            } else {
-                print(reference)
-                print("Remove successfully")
-                Defined.ref.child("Table/\(Int(self.numberTb) ?? 0)").updateChildValues(["statu": 1])
-                self.dismiss(animated: true, completion: nil)
-            }
-        }
+    @objc func action(sender: UIBarButtonItem) {
+        view.endEditing(true)
+        txtChiecKhau.isEnabled = true;
     }
 }
 
 extension UIView {
     func toImage() -> UIImage {
         UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.main.scale)
+        
         drawHierarchy(in: self.bounds, afterScreenUpdates: true)
+        
         let image = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return image
     }
 }
+extension DetailBillViewController: UITableViewDataSource, UITableViewDelegate{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return listFood.count
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = DetailFoodCell.loadCell(tableView) as! DetailFoodCell
+        let fo = listFood[indexPath.row]
+        let pr = listPrice[indexPath.row]
+        cell.setUp(name: fo, price: pr)
+        return cell
+    }
+    
+}
+
+
+extension DetailBillViewController: UIPickerViewDelegate, UIPickerViewDataSource{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return phamTram.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return phamTram[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        select = phamTram[row]
+        txtChiecKhau.text = String("\(select ?? "")" + "%")
+        
+        if let strAmount = select,
+           let intAmount = Int(strAmount){
+            discount = intAmount
+        }
+        let abc = totalPayInDiscount * discount/100
+        
+        lblTotalPay.text = String(totalPayInDiscount  - abc) + "VND"
+    }
+}
+
