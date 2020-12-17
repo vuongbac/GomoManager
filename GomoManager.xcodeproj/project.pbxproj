@@ -11,6 +11,7 @@
 		5E52F4F225828DDB00505A83 /* EmployeesCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E52F4F025828DDB00505A83 /* EmployeesCell1.swift */; };
 		5E52F4F325828DDB00505A83 /* EmployeesCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E52F4F125828DDB00505A83 /* EmployeesCell1.xib */; };
 		5E52F4FB2582A09C00505A83 /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E52F4FA2582A09B00505A83 /* Constans.swift */; };
+		5EA6B03F258BB021001284A2 /* DetailEmployessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA6B03E258BB021001284A2 /* DetailEmployessViewController.swift */; };
 		5EAA985E258286DB004FB209 /* StatusTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAA985D258286DB004FB209 /* StatusTableViewController.swift */; };
 		5EAA986525828762004FB209 /* TableCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAA986325828762004FB209 /* TableCCell.swift */; };
 		5EAA986625828762004FB209 /* TableCCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EAA986425828762004FB209 /* TableCCell.xib */; };
@@ -77,6 +78,7 @@
 		5E52F4F025828DDB00505A83 /* EmployeesCell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesCell1.swift; sourceTree = "<group>"; };
 		5E52F4F125828DDB00505A83 /* EmployeesCell1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeesCell1.xib; sourceTree = "<group>"; };
 		5E52F4FA2582A09B00505A83 /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
+		5EA6B03E258BB021001284A2 /* DetailEmployessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEmployessViewController.swift; sourceTree = "<group>"; };
 		5EAA985D258286DB004FB209 /* StatusTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTableViewController.swift; sourceTree = "<group>"; };
 		5EAA986325828762004FB209 /* TableCCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCCell.swift; sourceTree = "<group>"; };
 		5EAA986425828762004FB209 /* TableCCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableCCell.xib; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 			children = (
 				5ECAFB5D25733BA50055672E /* EmployeesViewController.swift */,
 				5ECAFB6525733BC10055672E /* AddEmployeesViewController.swift */,
+				5EA6B03E258BB021001284A2 /* DetailEmployessViewController.swift */,
 			);
 			path = Employees;
 			sourceTree = "<group>";
@@ -623,6 +626,7 @@
 				5E52F4FB2582A09C00505A83 /* Constans.swift in Sources */,
 				5ECAFA9C257334C50055672E /* SceneDelegate.swift in Sources */,
 				5ECAFB3D25733ACE0055672E /* AddMenuViewController.swift in Sources */,
+				5EA6B03F258BB021001284A2 /* DetailEmployessViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

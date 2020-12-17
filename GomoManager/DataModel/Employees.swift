@@ -14,4 +14,6 @@ struct Employees: Codable {
     var birtday: String? = nil
     var email: String? = nil
     var name: String? = nil
+    var phone: String? = nil
+    var gender:String? = nil
 }

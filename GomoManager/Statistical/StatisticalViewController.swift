@@ -44,11 +44,15 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
     
     @objc func dataChange(dataPicker : UIDatePicker){
         txtSelectYear.text = dateFormatTime(date: dataPicker.date)
+        getDataBill()
+        self.totalMonth = [Int](repeating: 0, count: 12)
+
         view.endEditing(true)
+
     }
     
     func getDataBill(){
-        Defined.ref.child("Account").child(idAdmin ?? "").child("Bill/Done").observe(DataEventType.value) { [self] (DataSnapshot) in
+        Defined.ref.child("Account").child(idAdmin ?? "").child("Bill/Done").observe(DataEventType.value) { (DataSnapshot) in
             if let snapshort = DataSnapshot.children.allObjects as? [DataSnapshot]{
                 self.bills.removeAll()
                 self.totalYear = 0
@@ -61,10 +65,6 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
                         let detilbill = value["detilbill"] as? String
                         let numbertable = value["numbertable"] as? String
                         let total = value["total"] as! Int
-                        
-                        let bill = Bill(id: id, numberTable: numbertable, detailFood: detilbill, Total: total, date: date)
-                        self.bills.append(bill)
-                        
                         let tempDate = date.split(separator: "/")
                         // lấy tổng doanh thu ngày hiên tại
                         
@@ -73,18 +73,22 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
                         
                         // lấy tổng doanh thu của cả năm
                         let checkYear = tempDate[2]
-                        if checkYear == "2020" {
-                            self.totalYear += total 
-                            self.amountYear.text = "\(Defined.formatter.string(from: NSNumber(value: totalYear ))!)" + " VNĐ"
+                        if checkYear == self.txtSelectYear.text ?? "" {
+                            let bill = Bill(id: id, numberTable: numbertable, detailFood: detilbill, Total: total, date: date)
+                            self.bills.append(bill)
+                            print(self.txtSelectYear.text)
+                            self.totalYear += total
+                            print(total)
+                            self.amountYear.text = "\(Defined.formatter.string(from: NSNumber(value: self.totalYear ))!)" + " VNĐ"
                         }
-                        let dateThis = dateFormatTime(date: Date())
-                        let temp = dateThis.split(separator: "/")
-                        let checkDayData = tempDate[0]
-                        let checkDaySystem = temp[0]
-                        if checkDayData == checkDaySystem{
-                            self.totalDay += total
-                            self.amountDay.text = "\(Defined.formatter.string(from: NSNumber(value: totalDay ))!)" + " VNĐ"
-                        }
+//                        let dateThis = dateFormatTime(date: Date())
+//                        let temp = dateThis.split(separator: "/")
+//                        let checkDayData = tempDate[0]
+//                        let checkDaySystem = temp[0]
+//                        if checkDayData == checkDaySystem{
+//                            self.totalDay += total
+//                            self.amountDay.text = "\(Defined.formatter.string(from: NSNumber(value: totalDay ))!)" + " VNĐ"
+//                        }
                         self.totalMonth[(Int(String(checkDate)) ?? 0) - 1] += total/1000000
                         self.setChartValue(name: self.moth2, data: self.totalMonth)
                     }

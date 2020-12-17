@@ -13,5 +13,11 @@ class Constans {
     static let message1 = "Vẫn còn bàn đang hoạt động chưa thể đặt lại số bàn"
     static let message2 = "Bạn có muốn thay đổi số bàn hiện tại trong quán không?"
     static let deleteFood = "Xoá đồ ăn khỏi menu"
+    static let validateEmail = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+    static let notification = "Gomo"
+    static let alertEmail = "Không đúng định dạng Email"
+
+
+
 
 }
