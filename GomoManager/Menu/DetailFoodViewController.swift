@@ -50,29 +50,19 @@ class DetailFoodViewController: UIViewController {
     }
     
     @IBAction func btnDeleteFood(_ sender: Any) {
-        let alert = UIAlertController(title: Constans.title,
-                                      message: Constans.deleteFood,
-                                      preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: Constans.cancel,
-                                      style: .cancel,
-                                      handler: nil))
-        alert.addAction(UIAlertAction(title: Constans.ok,
-                                      style: .default,
-                                      handler: { action in
-                                        
-                                        switch self.statusMenu {
-                                        case "drink":
-                                            Defined.ref.child("Account").child(self.idAdmin ?? "").child("Menu/Drink/\(self.idFood)").removeValue { (error, reference) in}
-                                            self.navigationController?.popViewController(animated: true)
-                                        case "food":
-                                            Defined.ref.child("Account").child(self.idAdmin ?? "").child("Menu/Food/\(self.idFood)").removeValue { (error, reference) in}
-                                            self.navigationController?.popViewController(animated: true)
-                                        default:
-                                            Defined.ref.child("Account").child(self.idAdmin ?? "").child("Menu/Other/\(self.idFood)").removeValue { (error, reference) in}
-                                            self.navigationController?.popViewController(animated: true)
-                                        }
-                                      }))
-        self.present(alert, animated: true)
+        AlertUtil.actionAlert(from: self, with: Constans.title, message: Constans.deleteFood) { (ac) in
+            switch self.statusMenu {
+            case "drink":
+                Defined.ref.child("Account").child(self.idAdmin ?? "").child("Menu/Drink/\(self.idFood)").removeValue { (error, reference) in}
+                self.navigationController?.popViewController(animated: true)
+            case "food":
+                Defined.ref.child("Account").child(self.idAdmin ?? "").child("Menu/Food/\(self.idFood)").removeValue { (error, reference) in}
+                self.navigationController?.popViewController(animated: true)
+            default:
+                Defined.ref.child("Account").child(self.idAdmin ?? "").child("Menu/Other/\(self.idFood)").removeValue { (error, reference) in}
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
     }
     
     @IBAction func btnEditFood(_ sender: Any) {

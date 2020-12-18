@@ -27,7 +27,7 @@ class DetailBillViewController: UIViewController {
     var listPrice:[Int] = []
     var select: String?
     var phamTram = ["0","5","10","15","20","25","30","35","40","45","50"]
-
+    
     
     var detailFood = ""
     var amount = 0
@@ -48,7 +48,6 @@ class DetailBillViewController: UIViewController {
         customView()
         setDataBill()
         setUp()
-        print("backol\(date)")
     }
     
     func customView(){
@@ -135,12 +134,12 @@ class DetailBillViewController: UIViewController {
            let intAmount = Int(strAmount){
             moneyMinus = intAmount
         }
-            if moneyMinus > total{
-              //  self.showDialog(title: Constans.notification, message: Constans.pay)
-            }else{
-                totalPayInDiscount = total - moneyMinus
-                lblTotalPay.text = "\(Defined.formatter.string(from: NSNumber(value: totalPayInDiscount))!)" + " VNĐ"
-            }
+        if moneyMinus > total{
+            AlertUtil.showAlert(from: self, with: Constans.title, message: "tiền chiết khấu không thể lớn hơn tiền thanh toán")
+        }else{
+            totalPayInDiscount = total - moneyMinus
+            lblTotalPay.text = "\(Defined.formatter.string(from: NSNumber(value: totalPayInDiscount))!)" + " VNĐ"
+        }
         
     }
     
@@ -153,17 +152,6 @@ class DetailBillViewController: UIViewController {
         printController.printInfo = printInfo
         printController.printingItem = subView.toImage()
         printController.present(animated: true, completionHandler: nil)
-    }
-    
-    func showDialog(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                                        switch action.style{
-                                        case .default: break
-                                        case .cancel: break
-                                        case .destructive: break
-                                        }}))
-        self.present(alert, animated: true, completion: nil)
     }
     
     // tạo Pickerview
@@ -195,18 +183,16 @@ class DetailBillViewController: UIViewController {
 extension UIView {
     func toImage() -> UIImage {
         UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.main.scale)
-        
         drawHierarchy(in: self.bounds, afterScreenUpdates: true)
-        
         let image = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return image
     }
 }
+
 extension DetailBillViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listFood.count
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

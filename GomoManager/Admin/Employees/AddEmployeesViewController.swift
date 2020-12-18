@@ -143,7 +143,7 @@ class AddEmployeesViewController: UIViewController {
                     "address": txtAdd.text ?? ""]
                 if let email = txtEmail.text, let password = txtPassword.text{
                     if  isValidEmail(email: email) == false && email.count != 0{
-                        AlertUtil.showAlert(from: self, with: Constans.notification, message: Constans.alertEmail)
+                        AlertUtil.showAlert(from: self, with: Constans.title, message: Constans.alertEmail)
                     }else{
                         Auth.auth().currentUser?.updatePassword(to: password) { (error) in
                          

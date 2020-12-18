@@ -9,17 +9,37 @@ import UIKit
 import Firebase
 
 class StatusTableViewController: UIViewController {
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
     let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
     var tables = [Table]()
     var status = 1
-
+    var updateTable = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         TableCCell.registerCellByNib(collectionView)
         getNumberTable()
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        collectionView.addGestureRecognizer(longPress)
     }
+    
+    @objc func handleLongPress(sender: UILongPressGestureRecognizer) {
+        if sender.state == UIGestureRecognizer.State.began {
+            let touchPoint = sender.location(in: collectionView)
+            if let indexPath = collectionView.indexPathForItem(at: touchPoint) {
+                let tb = tables[indexPath.row]
+                let nameTbale = tb.NumberTable ?? 0
+                if tables[indexPath.row].statu == 1{
+                    AlertUtil.actionAlert(from: self, with: Constans.title, message: Constans.deleteTable) { (ac) in
+                        Defined.ref.child("Account").child(self.idAdmin ?? "").child("Table").child(String(nameTbale)).removeValue()
+                    }
+                }
+            }
+        }
+        
+    }
+    
     
     func getNumberTable(){
         Defined.ref.child("Account").child(idAdmin ?? "").child("Table").observe(DataEventType.value) { (DataSnapshot) in
