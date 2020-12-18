@@ -15,7 +15,6 @@ class AddEmployeesViewController: UIViewController {
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var subView: UIView!
     @IBOutlet weak var btnAdd: UIButton!
-    @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtName: UITextField!
     @IBOutlet weak var txtBirthday: UITextField!
@@ -100,13 +99,12 @@ class AddEmployeesViewController: UIViewController {
         if edit == "edit"{
             editDataEmployees()
         }else{
-            if txtAdd.text?.count == 0 || txtName.text?.count == 0 || txtEmail.text?.count  == 6 || txtPhone.text?.count == 0 || txtBirthday.text?.count == 0 || txtPassword.text?.count == 0  {
+            if txtAdd.text?.count == 0 || txtName.text?.count == 0 || txtEmail.text?.count  == 6 || txtPhone.text?.count == 0 || txtBirthday.text?.count == 0 {
                 AlertUtil.showAlert(from: self, with: "Gomo", message: "Vui lòng nhập đủ các trường")
             }else{
                 addDataEmployees()
             }
         }
-        
     }
     
     @IBAction func btnSelectGender(_ sender: UISegmentedControl) {
@@ -134,22 +132,20 @@ class AddEmployeesViewController: UIViewController {
                 }
                 let writeData: [String: Any] = [
                     "email": txtEmail.text ?? "",
-                    "password": txtPassword.text ?? "",
+                    "password": "gomo@123",
                     "name": txtName.text ?? "",
                     "birthday": txtBirthday.text ?? "",
                     "gender": gender,
                     "phone": txtPhone.text ?? "",
                     "avatar": "\(url)",
                     "address": txtAdd.text ?? ""]
-                if let email = txtEmail.text, let password = txtPassword.text{
+                if let email = txtEmail.text{
                     if  isValidEmail(email: email) == false && email.count != 0{
                         AlertUtil.showAlert(from: self, with: Constans.title, message: Constans.alertEmail)
                     }else{
-                        Auth.auth().currentUser?.updatePassword(to: password) { (error) in
-                         
-                        }
+                        
                     }
-                    Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                    Auth.auth().createUser(withEmail: email, password: "gomo@123") { authResult, error in
                         if authResult != nil{
                             
                             Defined.ref.child("Account").child(idAdmin ?? "").child("Employees").child("\(em ?? "")").setValue(writeData)
@@ -170,7 +166,6 @@ class AddEmployeesViewController: UIViewController {
     }
     
     func editDataEmployees(){
-        
         let cutEmail = txtEmail.text
         let tempString = cutEmail?.split(separator: "@")
         let em = tempString?[0]
@@ -193,7 +188,6 @@ class AddEmployeesViewController: UIViewController {
                     "phone": txtPhone.text ?? "",
                     "avatar": "\(url)",
                     "address": txtAdd.text ?? ""]
-                
                 Defined.ref.child("Account").child(idAdmin ?? "").child("Employees").child("\(em ?? "")").updateChildValues(editData)
             })
         })

@@ -34,8 +34,6 @@ class AlertUtil {
         }
     }
     
-    
-    
     class func actionAlert(from viewController: UIViewController, with title: String, message: String,  completion : (@escaping (UIAlertAction) -> Void)) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

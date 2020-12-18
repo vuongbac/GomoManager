@@ -15,12 +15,10 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var chartView: LineChartView!
     @IBOutlet weak var amountYear: UILabel!
     @IBOutlet weak var txtSelectYear: UITextField!
-    let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
-    
-    private var dataPicker: UIDatePicker?
-    
-    var bills = [Bill]()
     var moth2:Array<String> = ["1","2","3","4","5","6","7","8","9","10","11"]
+    let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
+    private var dataPicker: UIDatePicker?
+    var bills = [Bill]()
     var totalMonth = [Int](repeating: 0, count: 12)
     var totalYear = 0
     var totalDay = 0
@@ -36,66 +34,48 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
         dataPicker?.datePickerMode = .date
         dataPicker?.preferredDatePickerStyle = .wheels
         txtSelectYear.inputView = dataPicker
-        dataPicker?.addTarget(self, action: #selector(dataChange(dataPicker:)), for: .valueChanged)
-
         Defined.formatter.groupingSeparator = "."
         Defined.formatter.numberStyle = .decimal
+        dataPicker?.addTarget(self, action: #selector(dataChange(dataPicker:)), for: .valueChanged)
+        
     }
     
     @objc func dataChange(dataPicker : UIDatePicker){
         txtSelectYear.text = dateFormatTime(date: dataPicker.date)
         getDataBill()
-        self.totalMonth = [Int](repeating: 0, count: 12)
-
         view.endEditing(true)
-
     }
     
     func getDataBill(){
-        Defined.ref.child("Account").child(idAdmin ?? "").child("Bill/Done").observe(DataEventType.value) { (DataSnapshot) in
-            if let snapshort = DataSnapshot.children.allObjects as? [DataSnapshot]{
-                self.bills.removeAll()
-                self.totalYear = 0
-                self.totalDay = 0
-                self.totalMonth = [Int](repeating: 0, count: 12)
-                for snap in snapshort {
-                    let id = snap.key
-                    if let value = snap.value as? [String: Any] {
-                        let date = value["date"] as! String
-                        let detilbill = value["detilbill"] as? String
-                        let numbertable = value["numbertable"] as? String
-                        let total = value["total"] as! Int
-                        let tempDate = date.split(separator: "/")
-                        // lấy tổng doanh thu ngày hiên tại
-                        
-                        // lấy tổng doanh thu tháng
-                        let checkDate = tempDate[1]
-                        
-                        // lấy tổng doanh thu của cả năm
-                        let checkYear = tempDate[2]
-                        if checkYear == self.txtSelectYear.text ?? "" {
-                            let bill = Bill(id: id, numberTable: numbertable, detailFood: detilbill, Total: total, date: date)
-                            self.bills.append(bill)
-                            print(self.txtSelectYear.text)
-                            self.totalYear += total
-                            print(total)
-                            self.amountYear.text = "\(Defined.formatter.string(from: NSNumber(value: self.totalYear ))!)" + " VNĐ"
-                        }
-//                        let dateThis = dateFormatTime(date: Date())
-//                        let temp = dateThis.split(separator: "/")
-//                        let checkDayData = tempDate[0]
-//                        let checkDaySystem = temp[0]
-//                        if checkDayData == checkDaySystem{
-//                            self.totalDay += total
-//                            self.amountDay.text = "\(Defined.formatter.string(from: NSNumber(value: totalDay ))!)" + " VNĐ"
-//                        }
-                        self.totalMonth[(Int(String(checkDate)) ?? 0) - 1] += total/1000000
-                        self.setChartValue(name: self.moth2, data: self.totalMonth)
-                    }
+        Defined.ref.child("Account").child(idAdmin ?? "").child("Bill/Done").observe(DataEventType.value) { [self] snapshort in
+            self.bills.removeAll()
+            self.totalMonth = [Int](repeating: 0, count: 12)
+            self.amountYear.text = String("0" + "VNĐ")
+            totalYear = 0
+            for case let snap as DataSnapshot in snapshort.children {
+                guard let dict = snap.value as? [String:Any] else {
+                    return
+                }
+                
+                let date = dict["date"] as! String
+                let total = dict["total"] as! Int
+                
+                let tempDate = date.split(separator: "/")
+                let checkDay = tempDate[0] // day
+                let checkMonth = tempDate[1] // month
+                let checkYear = tempDate[2] // year
+                
+                if txtSelectYear.text! == checkYear{
+                    self.totalYear += total
+                    self.amountYear.text = "\(Defined.formatter.string(from: NSNumber(value: self.totalYear ))!)" + " VNĐ"
+                    self.totalMonth[(Int(String(checkMonth)) ?? 0) - 1] += total/1000000
                 }
             }
+            self.setChartValue(name: self.moth2, data: self.totalMonth)
+
         }
     }
+    
     
     func setChartValue(name:[String], data:[Int]) {
         var lineData:[ChartDataEntry] = []
