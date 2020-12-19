@@ -70,6 +70,14 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
                     self.amountYear.text = "\(Defined.formatter.string(from: NSNumber(value: self.totalYear ))!)" + " VNĐ"
                     self.totalMonth[(Int(String(checkMonth)) ?? 0) - 1] += total/1000000
                 }
+                
+                let dateThis = dateFormatTime2(date: Date())
+                let temp = dateThis.split(separator: "/")
+                let checkDaySystem = temp[0]
+                if checkDay == checkDaySystem{
+                self.totalDay += total
+                self.amountDay.text = "\(Defined.formatter.string(from: NSNumber(value: totalDay ))!)" + " VNĐ"
+            }
             }
             self.setChartValue(name: self.moth2, data: self.totalMonth)
 
@@ -91,6 +99,12 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
     func dateFormatTime(date : Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy"
+        return dateFormatter.string(from: date)
+    }
+    
+    func dateFormatTime2(date : Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
         return dateFormatter.string(from: date)
     }
 }
