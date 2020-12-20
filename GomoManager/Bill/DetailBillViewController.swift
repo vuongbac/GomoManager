@@ -1,9 +1,4 @@
-//
-//  DetailBillViewController.swift
-//  Gomo
-//
-//  Created by Vương Toàn Bắc on 11/12/20.
-//
+
 
 import UIKit
 import  Firebase
@@ -22,13 +17,12 @@ class DetailBillViewController: UIViewController {
     @IBOutlet weak var lblTotalPay: UILabel!
     @IBOutlet weak var lblNote: UITextField!
     
-    let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
     var listFood:[String] = []
     var listPrice:[Int] = []
     var select: String?
     var phamTram = ["0","5","10","15","20","25","30","35","40","45","50"]
-    
-    
+    let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
+
     var detailFood = ""
     var amount = 0
     var discount = 0
@@ -40,6 +34,13 @@ class DetailBillViewController: UIViewController {
     var time = ""
     var listpricefood = ""
     var moneyMinus = 0
+    var note = ""
+    var discount1 = ""
+    var othermoney = ""
+    var totalPay1 = 0
+    var money = 0
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,11 +74,18 @@ class DetailBillViewController: UIViewController {
             self.listPrice.append(Int(tempPrice[i]) ?? 0)
         }
         let total = listPrice.reduce(0, +)
-        lblTotalPay.text = "\(Defined.formatter.string(from: NSNumber(value: total ))!)" + " VNĐ"
         lblAmount.text = "\(Defined.formatter.string(from: NSNumber(value: total ))!)" + " VNĐ"
         lblDate.text = time
         numberTable.text = "Bàn số: \(numberTb)"
         totalPayInDiscount = total - moneyMinus
+        txtTruTien.text = othermoney
+        txtChiecKhau.text = discount1
+        lblNote.text = note
+        if status == "1"{
+            lblTotalPay.text = String(totalPay1)
+        }else{
+            lblTotalPay.text = String(total)
+        }
     }
     
     func setDataBill() {
@@ -85,12 +93,17 @@ class DetailBillViewController: UIViewController {
             btnPay1.isEnabled = false
             txtTruTien.isEnabled = false
             txtChiecKhau.isEnabled = false
+            lblNote.isEnabled = false
         }else{
             btnPay1.isEnabled = true
         }
         
     }
     func billDone(){
+        if let strAmount = lblTotalPay.text,
+           let intAmount = Int(strAmount){
+            money = intAmount
+        }
         let total = listPrice.reduce(0, +)
         let billDone = [
             "detilbill": detailFood ,
@@ -101,14 +114,13 @@ class DetailBillViewController: UIViewController {
             "time":time,
             "date":date,
             "note":lblNote.text ?? "",
-            "totalpay": lblTotalPay.text ?? "",
+            "totalpay": money,
             "numbertable":numberTb,] as [String: Any]
-        Defined.ref.child("Account").child(self.idAdmin ?? "").child("Bill/Done").childByAutoId().setValue(billDone)
+        Defined.ref.child("Account").child(idAdmin ?? "").child("Bill/Done").childByAutoId().setValue(billDone)
     }
     
-    
     func billPay()  {
-        Defined.ref.child("Account").child(self.idAdmin ?? "").child("Bill/Present/\(Int(self.numberTb) ?? 0)").removeValue { (error, reference) in
+        Defined.ref.child("Account").child(idAdmin ?? "").child("Bill/Present/\(Int(self.numberTb) ?? 0)").removeValue { (error, reference) in
             if error != nil {
                 print("Error: \(error!)")
             } else {
@@ -134,13 +146,12 @@ class DetailBillViewController: UIViewController {
            let intAmount = Int(strAmount){
             moneyMinus = intAmount
         }
-        if moneyMinus > total{
-            AlertUtil.showAlert(from: self, with: Constans.title, message: "tiền chiết khấu không thể lớn hơn tiền thanh toán")
-        }else{
-            totalPayInDiscount = total - moneyMinus
-            lblTotalPay.text = "\(Defined.formatter.string(from: NSNumber(value: totalPayInDiscount))!)" + " VNĐ"
-        }
-        
+            if moneyMinus > total{
+                AlertUtil.showAlert(from: self, with:Constans.title, message:Constans.pay)
+            }else{
+                totalPayInDiscount = total - moneyMinus
+                lblTotalPay.text = String(totalPayInDiscount)
+            }
     }
     
     
@@ -183,16 +194,18 @@ class DetailBillViewController: UIViewController {
 extension UIView {
     func toImage() -> UIImage {
         UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.main.scale)
+        
         drawHierarchy(in: self.bounds, afterScreenUpdates: true)
+        
         let image = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return image
     }
 }
-
 extension DetailBillViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listFood.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -204,7 +217,6 @@ extension DetailBillViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
 }
-
 
 extension DetailBillViewController: UIPickerViewDelegate, UIPickerViewDataSource{
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -229,7 +241,7 @@ extension DetailBillViewController: UIPickerViewDelegate, UIPickerViewDataSource
         }
         let abc = totalPayInDiscount * discount/100
         
-        lblTotalPay.text = String(totalPayInDiscount  - abc) + "VND"
+        lblTotalPay.text = String(totalPayInDiscount  - abc)
     }
 }
 

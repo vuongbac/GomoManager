@@ -1,9 +1,4 @@
-//
-//  StatusTableViewController.swift
-//  GomoManager
-//
-//  Created by Vương Toàn Bắc on 12/10/20.
-//
+
 
 import UIKit
 import Firebase
@@ -75,7 +70,7 @@ extension StatusTableViewController: UICollectionViewDelegate, UICollectionViewD
         case 1:
             cell.subView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         default:
-            cell.subView.backgroundColor = #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1)
+            cell.subView.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
         }
         return cell
     }

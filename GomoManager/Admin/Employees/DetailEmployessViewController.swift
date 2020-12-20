@@ -1,9 +1,4 @@
-//
-//  DetailEmployessViewController.swift
-//  GomoManager
-//
-//  Created by Vương Toàn Bắc on 12/17/20.
-//
+
 
 import UIKit
 import SDWebImage

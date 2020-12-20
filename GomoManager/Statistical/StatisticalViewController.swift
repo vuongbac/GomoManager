@@ -1,9 +1,3 @@
-//
-//  StatisticalViewController.swift
-//  GomoAdmin
-//
-//  Created by BAC Vuong Toan (VTI.Intern) on 11/13/20.
-//
 
 import UIKit
 import Charts
@@ -52,16 +46,17 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
             self.totalMonth = [Int](repeating: 0, count: 12)
             self.amountYear.text = String("0" + "VNĐ")
             totalYear = 0
+            totalDay  = 0
             for case let snap as DataSnapshot in snapshort.children {
                 guard let dict = snap.value as? [String:Any] else {
                     return
                 }
                 
                 let date = dict["date"] as! String
-                let total = dict["total"] as! Int
+                let total = dict["totalpay"] as! Int
                 
                 let tempDate = date.split(separator: "/")
-                let checkDay = tempDate[0] // day
+                let checkDay = tempDate[0] + "/" + tempDate[1] + "/" + tempDate[2] // day
                 let checkMonth = tempDate[1] // month
                 let checkYear = tempDate[2] // year
                 
@@ -73,7 +68,7 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
                 
                 let dateThis = dateFormatTime2(date: Date())
                 let temp = dateThis.split(separator: "/")
-                let checkDaySystem = temp[0]
+                let checkDaySystem = temp[0] + "/" + temp[1] + "/" + temp[2]
                 if checkDay == checkDaySystem{
                 self.totalDay += total
                 self.amountDay.text = "\(Defined.formatter.string(from: NSNumber(value: totalDay ))!)" + " VNĐ"

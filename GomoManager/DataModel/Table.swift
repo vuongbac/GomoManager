@@ -1,9 +1,4 @@
-//
-//  Table.swift
-//  GomoManager
-//
-//  Created by Vương Toàn Bắc on 12/1/20.
-//
+
 
 import Foundation
 struct Table: Codable {

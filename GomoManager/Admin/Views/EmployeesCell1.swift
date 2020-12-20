@@ -1,9 +1,4 @@
-//
-//  EmployeesCell1.swift
-//  GomoManager
-//
-//  Created by Vương Toàn Bắc on 12/11/20.
-//
+
 
 import UIKit
 

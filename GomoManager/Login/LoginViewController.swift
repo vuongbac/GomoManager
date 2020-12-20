@@ -1,9 +1,3 @@
-//
-//  LoginViewController.swift
-//  GomoAdmin
-//
-//  Created by Vương Toàn Bắc on 11/24/20.
-//
 
 import UIKit
 import GoogleSignIn

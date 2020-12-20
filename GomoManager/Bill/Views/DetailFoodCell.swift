@@ -1,9 +1,4 @@
-//
-//  DetailFoodCell.swift
-//  GomoApp
-//
-//  Created by Vương Toàn Bắc on 12/12/20.
-//
+
 
 import UIKit
 

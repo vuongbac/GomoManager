@@ -1,9 +1,4 @@
-//
-//  Food.swift
-//  GomoAdmin
-//
-//  Created by BAC Vuong Toan (VTI.Intern) on 10/20/20.
-//
+
 
 import Foundation
 
