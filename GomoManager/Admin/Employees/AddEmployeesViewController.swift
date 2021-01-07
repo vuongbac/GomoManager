@@ -23,6 +23,7 @@ class AddEmployeesViewController: UIViewController {
     var gender = ""
     var edit = ""
     var imageE = ""
+    var avatarF = ""
     var emailE = ""
     var nameF = ""
     var sexF = ""
@@ -56,7 +57,7 @@ class AddEmployeesViewController: UIViewController {
             txtAdd.text = addF
             txtName.text = nameF
             txtBirthday.text = ageF
-            avatar.sd_setImage(with: URL(string: imageE), completed: nil)
+            avatar.sd_setImage(with: URL(string: avatarF), completed: nil)
             txtPhone.text = phoneF
             txtEmail.isEnabled = false
         }else{

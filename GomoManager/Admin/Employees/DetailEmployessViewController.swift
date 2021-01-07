@@ -49,6 +49,7 @@ class DetailEmployessViewController: UIViewController {
         vc.phoneF = phoneF
         vc.ageF = addF
         vc.ageF = ageF
+        vc.avatarF = imageE
         self.present(vc, animated: true, completion: nil)
         
     }

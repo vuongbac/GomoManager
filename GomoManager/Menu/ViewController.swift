@@ -21,6 +21,7 @@ class ViewController: UIViewController {
         getFoodsData()
         status = "food"
         searchController.searchResultsUpdater = self
+        searchController.accessibilityHint = "Tìm Kiếm"
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
