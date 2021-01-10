@@ -12,9 +12,8 @@ class LoginViewController: UIViewController, UITabBarControllerDelegate {
     }
     
     func setUpButton(){
-        btnLogin.layer.borderWidth = 1
-        btnLogin.layer.borderColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
-        btnLogin.layer.cornerRadius = 7
+        btnLogin.addShadow(radius: 5)
+        btnLogin.addBoder(radius: 10, color: #colorLiteral(red: 0.1170637682, green: 0.6766145825, blue: 0.9572572112, alpha: 1))
     }
     
     @IBAction func btnLoginGoogle(_ sender: Any) {

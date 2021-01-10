@@ -19,7 +19,9 @@ class Constans {
     static let pay = "Số tiền giảm không được lớn hơn số tiền thanh toán"
 
 
-
+    //bill
+    static let billThis = "Hoá đơn hiện tại "
+    static let billThat = "Hoá đơn đã thanh toán"
 
 
 }

@@ -18,4 +18,6 @@ target 'GomoManager' do
     pod 'Charts'
     pod 'GoogleSignIn'
     pod 'FBSDKLoginKit'
+    pod 'BetterSegmentedControl'
+
 end

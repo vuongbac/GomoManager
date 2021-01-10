@@ -28,7 +28,8 @@ class AdminViewController: UIViewController {
     
     func setUp()  {
         nameAdmin.text = email
-        avatarAdmin.layer.cornerRadius = 50
+        avatarAdmin.addShadow(radius: 10)
+        avatarAdmin.addBoder(radius: 50, color: #colorLiteral(red: 0.1170637682, green: 0.6766145825, blue: 0.9572572112, alpha: 1))
         avatarAdmin.sd_setImage(with: URL(string: "https://lh3.googleusercontent.com\(String(avatar ?? ""))"), completed: nil)
     }
     
@@ -41,6 +42,7 @@ extension AdminViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = AdminCell.loadCell(tableView) as! AdminCell
         cell.setUpCell(nameCell: listTitleCell[indexPath.row], imageCell: listImageCell[indexPath.row])
+        cell.selectionStyle = .none
         return cell
     }
     

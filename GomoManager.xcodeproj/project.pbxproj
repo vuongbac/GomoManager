@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5E02AC5C2573477E00D4CE0B /* EditFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E02AC5B2573477E00D4CE0B /* EditFoodViewController.swift */; };
+		5E47A93825AA181300950F34 /* UIViewExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E47A93725AA181300950F34 /* UIViewExtentions.swift */; };
 		5E52F4F225828DDB00505A83 /* EmployeesCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E52F4F025828DDB00505A83 /* EmployeesCell1.swift */; };
 		5E52F4F325828DDB00505A83 /* EmployeesCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E52F4F125828DDB00505A83 /* EmployeesCell1.xib */; };
 		5E52F4FB2582A09C00505A83 /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E52F4FA2582A09B00505A83 /* Constans.swift */; };
@@ -75,6 +76,7 @@
 
 /* Begin PBXFileReference section */
 		5E02AC5B2573477E00D4CE0B /* EditFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFoodViewController.swift; sourceTree = "<group>"; };
+		5E47A93725AA181300950F34 /* UIViewExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtentions.swift; sourceTree = "<group>"; };
 		5E52F4F025828DDB00505A83 /* EmployeesCell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesCell1.swift; sourceTree = "<group>"; };
 		5E52F4F125828DDB00505A83 /* EmployeesCell1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeesCell1.xib; sourceTree = "<group>"; };
 		5E52F4FA2582A09B00505A83 /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				5ECAFA99257334C50055672E /* AppDelegate.swift */,
 				5ECAFAF1257338DE0055672E /* TabBarController.swift */,
 				5E52F4FA2582A09B00505A83 /* Constans.swift */,
+				5E47A93725AA181300950F34 /* UIViewExtentions.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -619,6 +622,7 @@
 				5ECAFB7225733C1D0055672E /* AdminCell.swift in Sources */,
 				5E02AC5C2573477E00D4CE0B /* EditFoodViewController.swift in Sources */,
 				5EE4EF01257561D500E04369 /* Table.swift in Sources */,
+				5E47A93825AA181300950F34 /* UIViewExtentions.swift in Sources */,
 				5ECAFB5525733B7D0055672E /* setUpTableViewController.swift in Sources */,
 				5ECAFB8825733D510055672E /* MenuCell.swift in Sources */,
 				5ECAFB6B25733BEC0055672E /* AdminViewController.swift in Sources */,

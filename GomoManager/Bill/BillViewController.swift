@@ -2,11 +2,12 @@
 
 import UIKit
 import Firebase
+import BetterSegmentedControl
 
 class BillViewController: UIViewController {
 
+    @IBOutlet weak var segmentedCustoms: BetterSegmentedControl!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var segmented: UISegmentedControl!
     let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
 
     var bills = [Bill]()
@@ -14,13 +15,23 @@ class BillViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        BillCell.registerCellByNib(tableView)
+        initComponent()
         getBillPresent()
-        status = "0"
     }
     
-    @IBAction func btnSelectBill(_ sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0{
+    fileprivate func initComponent() {
+        BillCell.registerCellByNib(tableView)
+        status = "0"
+        segmentedCustoms.cornerRadius = 20
+        segmentedCustoms.indicatorViewBackgroundColor = #colorLiteral(red: 0.2274329066, green: 0.5870787501, blue: 0.9447389245, alpha: 0.8470588235)
+        segmentedCustoms.segments = LabelSegment.segments(
+            withTitles:[Constans.billThis,Constans.billThat],
+            normalTextColor: #colorLiteral(red: 0.7411764706, green: 0.7411764706, blue: 0.7411764706, alpha: 1),selectedTextColor: #colorLiteral(red: 0.9254901961, green: 0.9568627451, blue: 0.9921568627, alpha: 1))
+    }
+    
+    
+    @IBAction func selectBill(_ sender: BetterSegmentedControl) {
+        if sender.index == 0 {
             getBillPresent()
             status = "0"
         }else{
@@ -99,12 +110,9 @@ extension BillViewController: UITableViewDelegate, UITableViewDataSource{
         vc.time = detailBill.time ?? ""
         vc.numberTb = detailBill.numberTable ?? ""
         vc.status = status
-        vc.note = detailBill.note ?? ""
-        vc.discount1 = detailBill.discouunt ?? ""
-        vc.othermoney = detailBill.othermoney ?? ""
         vc.listpricefood = detailBill.listpricefood ?? ""
         vc.totalPay1 = detailBill.totalPay ?? 0
-        self.present(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
  

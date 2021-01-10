@@ -5,17 +5,19 @@ import  Firebase
 
 class DetailBillViewController: UIViewController {
     
-    @IBOutlet weak var txtTruTien: UITextField!
+    @IBOutlet weak var cView1: UIView!
     @IBOutlet weak var txtChiecKhau: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lblCollector: UILabel!
     @IBOutlet weak var subView: UIView!
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var btnPay1: UIButton!
+    @IBOutlet weak var btnPrint: UIButton!
     @IBOutlet weak var lblAmount: UILabel!
     @IBOutlet weak var numberTable: UILabel!
     @IBOutlet weak var lblTotalPay: UILabel!
-    @IBOutlet weak var lblNote: UITextField!
+    @IBOutlet weak var btnEditBill: UIButton!
+    
     
     var listFood:[String] = []
     var listPrice:[Int] = []
@@ -34,9 +36,7 @@ class DetailBillViewController: UIViewController {
     var time = ""
     var listpricefood = ""
     var moneyMinus = 0
-    var note = ""
     var discount1 = ""
-    var othermoney = ""
     var totalPay1 = 0
     var money = 0
 
@@ -52,11 +52,12 @@ class DetailBillViewController: UIViewController {
     }
     
     func customView(){
-        subView.layer.borderWidth = 1
-        subView.layer.borderColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
-        subView.layer.cornerRadius = 5
-        subView.layer.shadowRadius = 5
-        subView.layer.shadowColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        subView.addShadow(radius: 5)
+        subView.addBoder(radius: 10, color: #colorLiteral(red: 0.2274329066, green: 0.5870787501, blue: 0.9447389245, alpha: 0.8470588235))
+        cView1.addShadow(radius: 5)
+        cView1.addBoder(radius: 1, color: #colorLiteral(red: 0.1170637682, green: 0.6766145825, blue: 0.9572572112, alpha: 1))
+        btnPay1.addBoder(radius: 20, color: #colorLiteral(red: 0.1170637682, green: 0.6766145825, blue: 0.9572572112, alpha: 1))
+        btnPrint.addBoder(radius: 20, color: #colorLiteral(red: 0.1170637682, green: 0.6766145825, blue: 0.9572572112, alpha: 1))
     }
     
     func setUp(){
@@ -74,13 +75,12 @@ class DetailBillViewController: UIViewController {
             self.listPrice.append(Int(tempPrice[i]) ?? 0)
         }
         let total = listPrice.reduce(0, +)
-        lblAmount.text = "\(Defined.formatter.string(from: NSNumber(value: total ))!)" + " VNĐ"
+        lblAmount.text = "\(Defined.formatter.string(from: NSNumber(value: total ))!)" + " đ"
         lblDate.text = time
         numberTable.text = "Bàn số: \(numberTb)"
         totalPayInDiscount = total - moneyMinus
-        txtTruTien.text = othermoney
         txtChiecKhau.text = discount1
-        lblNote.text = note
+        
         if status == "1"{
             lblTotalPay.text = String(totalPay1)
         }else{
@@ -90,10 +90,9 @@ class DetailBillViewController: UIViewController {
     
     func setDataBill() {
         if status == "1"{
+            btnPay1.alpha = 0
             btnPay1.isEnabled = false
-            txtTruTien.isEnabled = false
             txtChiecKhau.isEnabled = false
-            lblNote.isEnabled = false
         }else{
             btnPay1.isEnabled = true
         }
@@ -107,13 +106,11 @@ class DetailBillViewController: UIViewController {
         let total = listPrice.reduce(0, +)
         let billDone = [
             "detilbill": detailFood ,
-            "othermoney": txtTruTien.text ?? "" ,
             "listpricefood": listpricefood ,
             "total": total,
             "discount": txtChiecKhau.text ?? "",
             "time":time,
             "date":date,
-            "note":lblNote.text ?? "",
             "totalpay": money,
             "numbertable":numberTb,] as [String: Any]
         Defined.ref.child("Account").child(idAdmin ?? "").child("Bill/Done").childByAutoId().setValue(billDone)
@@ -126,34 +123,18 @@ class DetailBillViewController: UIViewController {
             } else {
                 Defined.ref.child("Account").child(self.idAdmin ?? "").child("Table").child(self.numberTb).child("ListFood").removeValue()
                 Defined.ref.child("Account").child(self.idAdmin ?? "").child("Table/\(Int(self.numberTb) ?? 0)").updateChildValues(["statu": 1])
-                self.dismiss(animated: true, completion: nil)
+                
             }
         }
     }
     
-    @IBAction func btnBack(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
     
     @IBAction func btnPay(_ sender: Any) {
         billDone()
         billPay()
+        self.navigationController?.popViewController(animated: true)
     }
-    
-    @IBAction func changePrice(_ sender: UITextField) {
-        let total = listPrice.reduce(0, +)
-        if let strAmount = txtTruTien.text,
-           let intAmount = Int(strAmount){
-            moneyMinus = intAmount
-        }
-            if moneyMinus > total{
-                AlertUtil.showAlert(from: self, with:Constans.title, message:Constans.pay)
-            }else{
-                totalPayInDiscount = total - moneyMinus
-                lblTotalPay.text = String(totalPayInDiscount)
-            }
-    }
-    
+
     
     @IBAction func btnScanBill(_ sender: Any) {
         let printController = UIPrintInteractionController.shared
