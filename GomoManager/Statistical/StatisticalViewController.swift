@@ -36,8 +36,7 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
          chartView.dragEnabled = false
          chartView.setScaleEnabled(false)
          chartView.highlightPerTapEnabled = false
-         chartView.legend.enabled = false
-
+        chartView.legend.enabled = false
 
          let rightAxis = chartView.rightAxis
          rightAxis.axisMinimum = 0
@@ -58,12 +57,12 @@ class StatisticalViewController: UIViewController, ChartViewDelegate {
          xAxis.drawGridLinesEnabled = false
          xAxis.drawAxisLineEnabled = false
         
-        
         subView1.addShadow(radius: 5)
         subView1.addBoder(radius: 10, color: #colorLiteral(red: 0.1170637682, green: 0.6766145825, blue: 0.9572572112, alpha: 1))
         subView2.addShadow(radius: 5)
         subView2.addBoder(radius: 10, color: #colorLiteral(red: 0.1170637682, green: 0.6766145825, blue: 0.9572572112, alpha: 1))
         txtSelectYear.addBoder(radius: 15, color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
+        txtSelectYear.text = "2021"
      }
 
     

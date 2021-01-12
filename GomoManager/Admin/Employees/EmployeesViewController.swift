@@ -41,7 +41,7 @@ class EmployeesViewController: UIViewController {
     
     
     @IBAction func btnAddEmployees(_ sender: Any) {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddEmployeesViewController") as! AddEmployeesViewController
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Constans.addemploys) as! AddEmployeesViewController
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -58,7 +58,7 @@ extension EmployeesViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailEmployessViewController") as! DetailEmployessViewController
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Constans.detailEmployes) as! DetailEmployessViewController
         let e = employees[indexPath.row]
         vc.nameF = e.name ?? ""
         vc.emailE = e.email ?? ""

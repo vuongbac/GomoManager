@@ -11,6 +11,8 @@ class DetailFoodViewController: UIViewController {
     @IBOutlet weak var lblPrice: UILabel!
     @IBOutlet weak var lblContent: UITextView!
     @IBOutlet weak var btnDelete: UIBarButtonItem!
+    @IBOutlet weak var textView: UITextView!
+    
     
     let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
     
@@ -30,10 +32,11 @@ class DetailFoodViewController: UIViewController {
     func setData(){
         Defined.formatter.groupingSeparator = "."
         Defined.formatter.numberStyle = .decimal
+        textView.addBoder(radius: 8, color: #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1))
         imageFood.sd_setImage(with: URL(string: img), completed: nil)
         lblNameFood.text = name
         let PriceFood = Int(price)
-        lblPrice.text = "\(Defined.formatter.string(from: NSNumber(value: PriceFood ?? 0 ))!)" + " VNĐ"
+        lblPrice.text = "\(Defined.formatter.string(from: NSNumber(value: PriceFood ?? 0 ))!)" + " đ"
         lblContent.text = content
         self.navigationController?.navigationBar.tintColor = .black
         imageFood.alpha = 0.9
@@ -61,7 +64,7 @@ class DetailFoodViewController: UIViewController {
     }
     
     @IBAction func btnEditFood(_ sender: Any) {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EditFoodViewController") as! EditFoodViewController
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Constans.editFood) as! EditFoodViewController
         vc.img = img
         vc.idFood = idFood
         vc.name = name

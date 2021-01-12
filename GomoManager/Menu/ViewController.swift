@@ -8,7 +8,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var segmentedCustoms: BetterSegmentedControl!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var btnAddFood: UIBarButtonItem!
+    
     let searchController = UISearchController(searchResultsController: nil)
     
     let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
@@ -18,20 +18,24 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        MenuCell.registerCellByNib(tableView)
         getFoodsData()
+        initComponent()
+    }
+    
+    fileprivate func initComponent() {
         status = "food"
+        MenuCell.registerCellByNib(tableView)
         searchController.searchResultsUpdater = self
         searchController.accessibilityHint = "Tìm Kiếm"
-        searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
         segmentedCustoms.cornerRadius = 20
         segmentedCustoms.indicatorViewBackgroundColor = #colorLiteral(red: 0.2274329066, green: 0.5870787501, blue: 0.9447389245, alpha: 0.8470588235)
-        segmentedCustoms.segments = LabelSegment.segments(withTitles: ["Đồ ăn", "Đồ uống ", "Đồ khác"],normalTextColor: #colorLiteral(red: 0.7411764706, green: 0.7411764706, blue: 0.7411764706, alpha: 1),selectedTextColor: #colorLiteral(red: 0.9254901961, green: 0.9568627451, blue: 0.9921568627, alpha: 1))
+        segmentedCustoms.segments = LabelSegment.segments(withTitles: [Constans.segmented_food,
+                                                                       Constans.segmented_drink,
+                                                                       Constans.segmented_other],normalTextColor: #colorLiteral(red: 0.7411764706, green: 0.7411764706, blue: 0.7411764706, alpha: 1),selectedTextColor: #colorLiteral(red: 0.9254901961, green: 0.9568627451, blue: 0.9921568627, alpha: 1))
     }
     
-   
     @IBAction func selectMenu(_ sender: BetterSegmentedControl) {
         switch sender.index {
         case 0:
@@ -43,13 +47,14 @@ class ViewController: UIViewController {
         default:
             getOtherData()
             status = "other"
+
         }
     }
     
-    
     @IBAction func btnAddMenu(_ sender: Any) {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddMenuViewController") as! AddMenuViewController
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Constans.addMenu) as! AddMenuViewController
         vc.statusMenu = status
+        print(status)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -133,7 +138,7 @@ extension ViewController:  UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailFoodViewController") as! DetailFoodViewController
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Constans.detailFood) as! DetailFoodViewController
         let fd = strFood[indexPath.row]
         vc.content = fd.note ?? ""
         vc.img = fd.image ?? ""

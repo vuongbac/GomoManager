@@ -9,6 +9,7 @@ class AddMenuViewController: UIViewController {
     @IBOutlet weak var txtPriceFood: UITextField!
     @IBOutlet weak var txtContent: UITextView!
     @IBOutlet weak var tbnAdd: UIButton!
+    @IBOutlet weak var textView: UITextView!
     
     let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
     var imagePicker = UIImagePickerController()
@@ -19,11 +20,10 @@ class AddMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         imagePicker.delegate = self
-        tbnAdd.layer.borderWidth = 0.5
-        tbnAdd.layer.cornerRadius = 25
-        imageFood.alpha = 0.9
+        tbnAdd.addShadow(radius: 5)
+        tbnAdd.addBoder(radius: 25, color: #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1))
+        textView.addBoder(radius: 8, color: #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1))
         self.getFoodsData()
     }
     
@@ -37,7 +37,7 @@ class AddMenuViewController: UIViewController {
         var isChecked = true
         for item in 0 ..< idFood.count {
             if txtNameFood.text?.lowercased() == idFood[item].lowercased() {
-                AlertUtil.showAlert(from: self, with: "Gomo", message: "Món ăn đã có trong menu")
+                AlertUtil.showAlert(from: self, with: Constans.title, message: Constans.check_food)
                 isChecked = false
             }
         }

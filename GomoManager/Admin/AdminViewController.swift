@@ -12,7 +12,10 @@ class AdminViewController: UIViewController {
     @IBOutlet weak var nameAdmin: UILabel!
     var acount = [Account]()
     
-    var listTitleCell = ["Quản lý nhân viên", "Thay đổi số bàn",  "Cài đặt thông báo", "Đăng xuất"]
+    var listTitleCell = [Constans.cell1,
+                         Constans.cell2,
+                         Constans.cell3,
+                         Constans.cell4 ]
     var listImageCell = ["manager", "notification", "setup_table", "logout"]
     
     let email = Defined.defaults.value(forKey: "email") as? String
@@ -50,20 +53,19 @@ extension AdminViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EmployeesViewController") as! EmployeesViewController
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Constans.addemploys) as! EmployeesViewController
             self.navigationController?.pushViewController(vc, animated: true)
         case 1:
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "setUpTableViewController") as! setUpTableViewController
-            self.navigationController?.pushViewController(vc, animated: true)
+            AlertUtil.showAlert(from: self, with: Constans.title, message: Constans.mess1)
         case 2:
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "setUpTableViewController") as! setUpTableViewController
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Constans.setUpTable) as! setUpTableViewController
             self.navigationController?.pushViewController(vc, animated: true)
         default:
             DispatchQueue.main.async {
                 Defined.defaults.removeObject(forKey: "email")
                 Defined.defaults.removeObject(forKey: "avatar")
                 GIDSignIn.sharedInstance()?.signOut()
-                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Constans.login) as! LoginViewController
                 vc.modalPresentationStyle  = .fullScreen
                 self.present(vc, animated: true, completion: nil)
             }

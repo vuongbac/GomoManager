@@ -39,10 +39,12 @@ class AddEmployeesViewController: UIViewController {
     
     func setUp(){
         ImagePicker.delegate = self
-        btnAdd.layer.cornerRadius = 7
-        avatar.layer.cornerRadius = 50
-        subView.layer.cornerRadius = 20
-        avatar.layer.borderWidth = 1
+        btnAdd.addBoder(radius: 8, color: #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1))
+        avatar.addShadow(radius: 10)
+        avatar.addBoder(radius: 50, color: #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1))
+        subView.addBoder(radius: 20, color: #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1))
+        subView.addShadow(radius: 10)
+    
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         avatar.isUserInteractionEnabled = true
         avatar.addGestureRecognizer(tapGestureRecognizer)
@@ -68,7 +70,6 @@ class AddEmployeesViewController: UIViewController {
     @objc func dataChange(dataPicker : UIDatePicker){
         txtBirthday.text = dateFormatTime(date: dataPicker.date)
         view.endEditing(true)
-
     }
     
     
@@ -96,7 +97,7 @@ class AddEmployeesViewController: UIViewController {
             editDataEmployees()
         }else{
             if txtAdd.text?.count == 0 || txtName.text?.count == 0 || txtEmail.text?.count  == 6 || txtPhone.text?.count == 0 || txtBirthday.text?.count == 0 {
-                AlertUtil.showAlert(from: self, with: "Gomo", message: "Vui lòng nhập đủ các trường")
+                AlertUtil.showAlert(from: self, with: Constans.title, message: Constans.checkform)
             }else{
                 addDataEmployees()
             }
@@ -145,7 +146,7 @@ class AddEmployeesViewController: UIViewController {
                         if authResult != nil{
                             
                             Defined.ref.child("Account").child(idAdmin ?? "").child("Employees").child("\(em ?? "")").setValue(writeData)
-                            self.navigationController?.popViewController(animated: true)
+                            self.dismiss(animated: true, completion: nil)
                         }else{
                             if let user = Auth.auth().currentUser {
                                 user.getIDToken { (token, er) in

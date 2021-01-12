@@ -28,6 +28,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="bMd-Ag-BIb"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="17"/>
                                 <state key="normal" title="    LOGIN WITH GOOGLE" image="google"/>
                                 <connections>
                                     <action selector="btnLoginGoogle:" destination="8bO-X3-uOz" eventType="touchUpInside" id="B8r-kf-YFH"/>
@@ -122,13 +123,11 @@
                     <navigationItem key="navigationItem" title="Menu" largeTitleDisplayMode="never" id="8TI-uz-uoX">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="pencil" catalog="system" id="pJt-cP-Cik">
                             <connections>
-                                <action selector="btnAddMenu:" destination="1lq-RG-Nde" id="Ecb-Hn-X1C"/>
-                                <segue destination="RS4-aD-k06" kind="show" id="M3C-a3-TC5"/>
+                                <action selector="btnAddMenu:" destination="1lq-RG-Nde" id="ZTZ-Rm-3CD"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="btnAddFood" destination="pJt-cP-Cik" id="fCi-Nr-HIm"/>
                         <outlet property="segmentedCustoms" destination="mLG-yi-NjD" id="ZeL-7a-W4g"/>
                         <outlet property="tableView" destination="CeP-jB-B7i" id="r4G-9J-spZ"/>
                     </connections>
@@ -156,7 +155,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="eXF-2C-eME"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Giá tiền:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6oL-1h-7Pz">
@@ -175,39 +174,38 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="i32-IC-mJ1">
-                                <rect key="frame" x="15" y="511.33333333333326" width="384" height="75"/>
+                                <rect key="frame" x="15" y="511.33333333333326" width="384" height="100"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="j7V-i6-9CP"/>
+                                    <constraint firstAttribute="height" constant="100" id="j7V-i6-9CP"/>
                                 </constraints>
                                 <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" name="TimesNewRomanPS-ItalicMT" family="Times New Roman" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oo3-TH-uox">
                                 <rect key="frame" x="15" y="400.33333333333331" width="384" height="1"/>
-                                <color key="backgroundColor" systemColor="labelColor"/>
+                                <color key="backgroundColor" red="0.47450980539999998" green="0.8392156959" blue="0.97647058959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="3i4-bC-DIr"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ssz-0W-4sh">
                                 <rect key="frame" x="15" y="471.33333333333331" width="384" height="1"/>
-                                <color key="backgroundColor" systemColor="labelColor"/>
+                                <color key="backgroundColor" red="0.47450980539999998" green="0.8392156959" blue="0.97647058959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="1Vl-qz-gop"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4DU-Wr-bXH">
                                 <rect key="frame" x="103.66666666666669" y="666" width="207" height="50"/>
-                                <color key="backgroundColor" red="0.5260974169" green="0.53220194580000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.47450980539999998" green="0.8392156959" blue="0.97647058959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="jE3-H9-BvH"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="TimesNewRomanPS-ItalicMT" family="Times New Roman" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="17"/>
                                 <state key="normal" title="Thêm vào menu ">
-                                    <color key="titleColor" systemColor="labelColor"/>
-                                    <color key="titleShadowColor" red="0.073296807709999995" green="0.77996617560000003" blue="0.53346502780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="btnAddFood:" destination="RS4-aD-k06" eventType="touchUpInside" id="Rbf-c5-O4d"/>
@@ -224,7 +222,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="sGX-sZ-lHx"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                         </subviews>
@@ -272,18 +270,19 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rdY-7f-mib">
                                 <rect key="frame" x="369.33333333333331" y="11" width="24.666666666666686" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemYellowColor"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" red="0.47450980539999998" green="0.8392156959" blue="0.97647058959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="camera" catalog="system"/>
                                 <connections>
                                     <action selector="tbnSelectImage:" destination="RS4-aD-k06" eventType="touchUpInside" id="YTL-bg-NeX"/>
                                 </connections>
                             </button>
+                            <color key="tintColor" red="0.47450980539999998" green="0.8392156959" blue="0.97647058959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="imageFood" destination="tbi-7X-0lr" id="1gV-6A-Yi1"/>
                         <outlet property="tbnAdd" destination="4DU-Wr-bXH" id="832-NM-GxS"/>
+                        <outlet property="textView" destination="i32-IC-mJ1" id="hZ4-Ms-gQN"/>
                         <outlet property="txtContent" destination="i32-IC-mJ1" id="ytN-EA-QgD"/>
                         <outlet property="txtNameFood" destination="SWM-h1-dOV" id="PqP-4A-cj8"/>
                         <outlet property="txtPriceFood" destination="5Zh-iu-m5q" id="GOf-e4-Dsv"/>
@@ -311,38 +310,38 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nhà hàng Gomo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPf-mc-Ia4">
-                                <rect key="frame" x="20" y="375.33333333333331" width="374" height="19"/>
+                                <rect key="frame" x="20" y="385.33333333333331" width="374" height="19"/>
                                 <fontDescription key="fontDescription" name="TimesNewRomanPS-ItalicMT" family="Times New Roman" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Giá Tiền:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vao-mB-qaV">
-                                <rect key="frame" x="15" y="404.33333333333331" width="67" height="19"/>
+                                <rect key="frame" x="15" y="414.33333333333331" width="67" height="19"/>
                                 <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldItalicMT" family="Times New Roman" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50.000 VND" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQp-DA-PPi">
-                                <rect key="frame" x="92" y="404.33333333333331" width="85" height="19"/>
+                                <rect key="frame" x="92" y="414.33333333333331" width="85" height="19"/>
                                 <fontDescription key="fontDescription" name="TimesNewRomanPS-ItalicMT" family="Times New Roman" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="6Gp-i4-oDB">
-                                <rect key="frame" x="15" y="469.33333333333331" width="384" height="246.66666666666669"/>
+                                <rect key="frame" x="15" y="479.33333333333331" width="384" height="206.66666666666669"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" name="TimesNewRomanPS-ItalicMT" family="Times New Roman" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NW7-lW-ZP3">
-                                <rect key="frame" x="345" y="428.33333333333331" width="51" height="31"/>
+                                <rect key="frame" x="345" y="438.33333333333331" width="51" height="31"/>
                                 <connections>
                                     <action selector="btnStatusFood:" destination="kIE-nD-DCF" eventType="valueChanged" id="cwQ-Qx-zIp"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hết hàng" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LB2-yw-4vd">
-                                <rect key="frame" x="20" y="434.33333333333331" width="305" height="19"/>
+                                <rect key="frame" x="20" y="444.33333333333331" width="305" height="19"/>
                                 <fontDescription key="fontDescription" name="TimesNewRomanPS-ItalicMT" family="Times New Roman" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -360,7 +359,7 @@
                             <constraint firstItem="nzb-Td-3Lo" firstAttribute="height" secondItem="kyV-82-pDA" secondAttribute="height" multiplier="0.45" id="LhC-K1-GuJ"/>
                             <constraint firstItem="NW7-lW-ZP3" firstAttribute="top" secondItem="eQp-DA-PPi" secondAttribute="bottom" constant="5" id="Loi-pH-b0i"/>
                             <constraint firstItem="6Gp-i4-oDB" firstAttribute="leading" secondItem="4Kd-eX-jFo" secondAttribute="leading" constant="15" id="MES-r6-Bij"/>
-                            <constraint firstItem="4Kd-eX-jFo" firstAttribute="bottom" secondItem="6Gp-i4-oDB" secondAttribute="bottom" constant="20" id="QQp-zi-3CQ"/>
+                            <constraint firstItem="4Kd-eX-jFo" firstAttribute="bottom" secondItem="6Gp-i4-oDB" secondAttribute="bottom" constant="50" id="QQp-zi-3CQ"/>
                             <constraint firstItem="4Kd-eX-jFo" firstAttribute="trailing" secondItem="nzb-Td-3Lo" secondAttribute="trailing" id="QVZ-Ji-Arh"/>
                             <constraint firstItem="Vao-mB-qaV" firstAttribute="leading" secondItem="4Kd-eX-jFo" secondAttribute="leading" constant="15" id="SWd-Zs-VGP"/>
                             <constraint firstItem="LB2-yw-4vd" firstAttribute="centerY" secondItem="NW7-lW-ZP3" secondAttribute="centerY" id="WGI-sb-42b"/>
@@ -374,7 +373,7 @@
                             <constraint firstItem="YPf-mc-Ia4" firstAttribute="leading" secondItem="4Kd-eX-jFo" secondAttribute="leading" constant="20" id="u3d-I7-3X8"/>
                             <constraint firstItem="Vao-mB-qaV" firstAttribute="top" secondItem="YPf-mc-Ia4" secondAttribute="bottom" constant="10" id="uYW-qe-nep"/>
                             <constraint firstItem="6Gp-i4-oDB" firstAttribute="top" secondItem="NW7-lW-ZP3" secondAttribute="bottom" constant="10" id="ugl-QV-xrn"/>
-                            <constraint firstItem="YPf-mc-Ia4" firstAttribute="top" secondItem="bJd-7D-g55" secondAttribute="bottom" id="zER-E4-dgp"/>
+                            <constraint firstItem="YPf-mc-Ia4" firstAttribute="top" secondItem="bJd-7D-g55" secondAttribute="bottom" constant="10" id="zER-E4-dgp"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zti-Ju-6ht">
@@ -401,11 +400,12 @@
                         <outlet property="lblContent" destination="6Gp-i4-oDB" id="Ux0-FB-niP"/>
                         <outlet property="lblNameFood" destination="bJd-7D-g55" id="qRN-1s-A6m"/>
                         <outlet property="lblPrice" destination="eQp-DA-PPi" id="99k-J5-KVg"/>
+                        <outlet property="textView" destination="6Gp-i4-oDB" id="6IF-IT-C2d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qu8-xd-pD4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-826.39999999999998" y="1251.7241379310346"/>
+            <point key="canvasLocation" x="79.710144927536234" y="1251.358695652174"/>
         </scene>
         <!--Edit Food View Controller-->
         <scene sceneID="vHS-MF-vFB">
@@ -428,32 +428,32 @@
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M3s-ni-Ntj">
                                 <rect key="frame" x="15" y="381.33333333333331" width="384" height="0.33333333333331439"/>
-                                <color key="backgroundColor" systemColor="labelColor"/>
+                                <color key="backgroundColor" red="0.47450980539999998" green="0.8392156959" blue="0.97647058959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="a66-n8-s5m"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nhà hàng Gomo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2oK-Na-eav">
-                                <rect key="frame" x="15" y="381.66666666666669" width="384" height="19"/>
+                                <rect key="frame" x="15" y="391.66666666666669" width="384" height="19"/>
                                 <fontDescription key="fontDescription" name="TimesNewRomanPS-ItalicMT" family="Times New Roman" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Giá Tiền:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HoY-Ft-EFS">
-                                <rect key="frame" x="15" y="415.66666666666669" width="67" height="19"/>
+                                <rect key="frame" x="15" y="425.66666666666669" width="67" height="19"/>
                                 <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldItalicMT" family="Times New Roman" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="gG5-kI-Ivq">
-                                <rect key="frame" x="15" y="455.66666666666669" width="384" height="195.33333333333331"/>
+                                <rect key="frame" x="15" y="465.66666666666669" width="384" height="185.33333333333331"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" name="TimesNewRomanPS-ItalicMT" family="Times New Roman" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VW2-Vr-nW0">
-                                <rect key="frame" x="87" y="405.33333333333331" width="312" height="40"/>
+                                <rect key="frame" x="87" y="415.33333333333331" width="312" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="c3b-Yv-Rce"/>
                                 </constraints>
@@ -461,15 +461,15 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jSQ-DV-qsN">
-                                <rect key="frame" x="87" y="445.33333333333331" width="312" height="0.33333333333331439"/>
-                                <color key="backgroundColor" systemColor="labelColor"/>
+                                <rect key="frame" x="87" y="455.33333333333331" width="312" height="0.33333333333331439"/>
+                                <color key="backgroundColor" red="0.47450980539999998" green="0.8392156959" blue="0.97647058959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="CPk-uw-TTx"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Sd-fO-9T3">
                                 <rect key="frame" x="374" y="0.0" width="25" height="22"/>
-                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.47450980539999998" green="0.8392156959" blue="0.97647058959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="camera" catalog="system"/>
                                 <connections>
                                     <action selector="btnSelectImage:" destination="Tl5-aN-c8M" eventType="touchUpInside" id="u1F-dE-gjt"/>
@@ -477,12 +477,15 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N0U-4F-EN8">
                                 <rect key="frame" x="103.66666666666669" y="661" width="207" height="45"/>
-                                <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                <color key="backgroundColor" red="0.47450980539999998" green="0.8392156959" blue="0.97647058959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="RK5-oS-YDq"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="15"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Lưu"/>
+                                <state key="normal" title="Lưu">
+                                    <color key="titleColor" systemColor="systemBackgroundColor"/>
+                                </state>
                                 <connections>
                                     <action selector="btnSave:" destination="Tl5-aN-c8M" eventType="touchUpInside" id="DaD-Rt-Pw1"/>
                                 </connections>
@@ -506,7 +509,7 @@
                             <constraint firstItem="Z41-2h-1dh" firstAttribute="trailing" secondItem="atL-wJ-V2D" secondAttribute="trailing" id="GfO-pX-K18"/>
                             <constraint firstItem="gG5-kI-Ivq" firstAttribute="top" secondItem="jSQ-DV-qsN" secondAttribute="bottom" constant="10" id="RMz-cg-vJR"/>
                             <constraint firstItem="HoY-Ft-EFS" firstAttribute="centerY" secondItem="VW2-Vr-nW0" secondAttribute="centerY" id="UPr-eH-9Am"/>
-                            <constraint firstItem="2oK-Na-eav" firstAttribute="top" secondItem="M3s-ni-Ntj" secondAttribute="bottom" id="Yti-4Q-Hcw"/>
+                            <constraint firstItem="2oK-Na-eav" firstAttribute="top" secondItem="M3s-ni-Ntj" secondAttribute="bottom" constant="10" id="Yti-4Q-Hcw"/>
                             <constraint firstItem="gG5-kI-Ivq" firstAttribute="leading" secondItem="Z41-2h-1dh" secondAttribute="leading" constant="15" id="aYg-kx-464"/>
                             <constraint firstItem="N0U-4F-EN8" firstAttribute="width" secondItem="7bN-hK-AkI" secondAttribute="width" multiplier="0.5" id="axd-AD-lmM"/>
                             <constraint firstItem="atL-wJ-V2D" firstAttribute="leading" secondItem="Z41-2h-1dh" secondAttribute="leading" id="dKb-g9-Olh"/>
@@ -526,6 +529,7 @@
                     <connections>
                         <outlet property="btnSelectImage" destination="7Sd-fO-9T3" id="L9e-H2-btn"/>
                         <outlet property="imageFood" destination="atL-wJ-V2D" id="S1W-ha-QnG"/>
+                        <outlet property="textView" destination="gG5-kI-Ivq" id="DkF-qm-aS2"/>
                         <outlet property="txtDescribeFood" destination="gG5-kI-Ivq" id="8Uw-LH-do4"/>
                         <outlet property="txtNameFood" destination="zKV-LX-xWT" id="fYN-uy-Qg3"/>
                         <outlet property="txtPriceFood" destination="VW2-Vr-nW0" id="3xP-e2-Og2"/>
@@ -533,7 +537,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e7b-Lq-igf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-106" y="1251"/>
+            <point key="canvasLocation" x="800.00000000000011" y="1250.5434782608697"/>
         </scene>
         <!--Hoá Đơn -->
         <scene sceneID="e7A-SD-f55">
@@ -850,10 +854,10 @@
             </objects>
             <point key="canvasLocation" x="2407.2463768115945" y="543.75"/>
         </scene>
-        <!--Bàn ăn-->
+        <!--Employees View Controller-->
         <scene sceneID="zMw-Gl-3m4">
             <objects>
-                <viewController storyboardIdentifier="EmployeesViewController" title="Bàn ăn" hidesBottomBarWhenPushed="YES" id="sJg-wM-RIn" customClass="EmployeesViewController" customModule="GomoManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EmployeesViewController" hidesBottomBarWhenPushed="YES" id="sJg-wM-RIn" customClass="EmployeesViewController" customModule="GomoManager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ahl-p7-Tk0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -861,6 +865,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="T8N-fZ-vUG">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="tintColor" systemColor="labelColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="R1B-g5-ccd">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -1018,7 +1023,7 @@
                                             <constraint firstAttribute="height" constant="40" id="oSe-Py-7vu"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u73-D4-BeP">
                                         <rect key="frame" x="10" y="346" width="352.66666666666669" height="1"/>
@@ -1049,7 +1054,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.97921536868186687" green="0.98679631326112838" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="AMt-RP-nj9" firstAttribute="top" secondItem="kJu-1y-VEC" secondAttribute="bottom" constant="5" id="0tr-gv-tV3"/>
                                     <constraint firstItem="g52-iE-8NB" firstAttribute="leading" secondItem="YHQ-BI-gTP" secondAttribute="leading" constant="10" id="19P-rs-umS"/>
@@ -1106,10 +1111,10 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eNd-F7-6OB">
-                                <rect key="frame" x="103.66666666666669" y="645.66666666666663" width="207" height="50"/>
+                                <rect key="frame" x="103.66666666666669" y="645.66666666666663" width="207" height="45"/>
                                 <color key="backgroundColor" systemColor="systemIndigoColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="3z4-Rq-VY5"/>
+                                    <constraint firstAttribute="height" constant="45" id="3z4-Rq-VY5"/>
                                 </constraints>
                                 <state key="normal" title="Thêm nhân viên">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1249,7 +1254,7 @@
         <!--Admin-->
         <scene sceneID="gcd-14-zv6">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OpM-fW-DJM" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="OpM-fW-DJM" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Admin" image="a" catalog="system" id="gbX-DQ-L8P"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4ud-XN-kdO">
@@ -1296,11 +1301,12 @@
                                 <rect key="frame" x="0.0" y="257.66666666666674" width="414" height="478.33333333333326"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5w-e6-8xc">
-                                        <rect key="frame" x="124.33333333333333" y="368.33333333333331" width="165.33333333333337" height="50"/>
-                                        <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                        <rect key="frame" x="103.66666666666669" y="373.33333333333331" width="207" height="45"/>
+                                        <color key="backgroundColor" red="0.47450980539999998" green="0.8392156959" blue="0.97647058959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="dQu-mE-rRN"/>
+                                            <constraint firstAttribute="height" constant="45" id="dQu-mE-rRN"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="15"/>
                                         <state key="normal" title="Xoá nhân viên">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -1313,7 +1319,7 @@
                                 <constraints>
                                     <constraint firstItem="T5w-e6-8xc" firstAttribute="centerX" secondItem="AiP-2l-0Xq" secondAttribute="centerX" id="3Wx-G3-2kX"/>
                                     <constraint firstAttribute="bottom" secondItem="T5w-e6-8xc" secondAttribute="bottom" constant="60" id="PHB-t1-KJe"/>
-                                    <constraint firstItem="T5w-e6-8xc" firstAttribute="width" secondItem="AiP-2l-0Xq" secondAttribute="width" multiplier="0.4" id="lCY-oG-jSn"/>
+                                    <constraint firstItem="T5w-e6-8xc" firstAttribute="width" secondItem="AiP-2l-0Xq" secondAttribute="width" multiplier="0.5" id="lCY-oG-jSn"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="how-1a-8EY">
@@ -1492,12 +1498,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NXa-eO-iMr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1397" y="1251"/>
+            <point key="canvasLocation" x="2302.898550724638" y="1250.5434782608697"/>
         </scene>
         <!--Detail Bill View Controller-->
         <scene sceneID="lDb-Yx-fqW">
             <objects>
-                <viewController storyboardIdentifier="DetailBillViewController" hidesBottomBarWhenPushed="YES" id="9aB-yO-hNF" customClass="DetailBillViewController" customModule="GomoApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailBillViewController" hidesBottomBarWhenPushed="YES" id="9aB-yO-hNF" customClass="DetailBillViewController" customModule="GomoManager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t8K-bG-l4a">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1587,7 +1593,7 @@
                                                     <constraint firstAttribute="height" constant="40" id="G5x-yj-SzP"/>
                                                     <constraint firstAttribute="width" constant="90" id="hnF-DK-XKc"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="15"/>
                                                 <state key="normal" title="In"/>
                                                 <connections>
                                                     <action selector="btnScanBill:" destination="9aB-yO-hNF" eventType="touchUpInside" id="Ohy-A8-g4Z"/>
@@ -1600,7 +1606,7 @@
                                                     <constraint firstAttribute="height" constant="40" id="UYJ-DA-ZGg"/>
                                                     <constraint firstAttribute="width" constant="90" id="oQI-75-zyX"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="15"/>
                                                 <state key="normal" title="Thanh Toán "/>
                                                 <connections>
                                                     <action selector="btnPay:" destination="9aB-yO-hNF" eventType="touchUpInside" id="DkR-M6-Htc"/>
@@ -1714,17 +1720,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xb2-IJ-GMS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2320" y="1251"/>
+            <point key="canvasLocation" x="3226.0869565217395" y="1250.5434782608697"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="mLG-yi-NjD">
-            <size key="intrinsicContentSize" width="195" height="32"/>
-        </designable>
-        <designable name="ySk-hP-85J">
-            <size key="intrinsicContentSize" width="195" height="32"/>
-        </designable>
-    </designables>
     <resources>
         <image name="Background 2" width="285" height="130.33332824707031"/>
         <image name="a" catalog="system" width="128" height="128"/>
@@ -1764,9 +1762,6 @@
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

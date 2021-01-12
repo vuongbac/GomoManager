@@ -41,7 +41,7 @@ class DetailEmployessViewController: UIViewController {
     }
     
     @IBAction func btnEdit(_ sender: Any) {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddEmployeesViewController") as! AddEmployeesViewController
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Constans.addemploys) as! AddEmployeesViewController
         vc.edit = "edit"
         vc.nameF = nameF
         vc.emailE = emailE

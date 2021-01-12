@@ -8,6 +8,7 @@ class EditFoodViewController: UIViewController {
     @IBOutlet weak var txtNameFood: UITextField!
     @IBOutlet weak var txtPriceFood: UITextField!
     @IBOutlet weak var imageFood: UIImageView!
+    @IBOutlet weak var textView: UITextView!
     let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
     
     var imagePicker = UIImagePickerController()
@@ -31,6 +32,7 @@ class EditFoodViewController: UIViewController {
         imageFood.sd_setImage(with: URL(string: img), completed: nil)
         txtPriceFood.text = price
         txtDescribeFood.text = content
+        textView.addBoder(radius: 8, color: #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1))
     }
     
     @IBAction func btnSave(_ sender: Any) {
