@@ -8,6 +8,8 @@ class BillViewController: UIViewController {
 
     @IBOutlet weak var segmentedCustoms: BetterSegmentedControl!
     @IBOutlet weak var tableView: UITableView!
+    var appDelegate = UIApplication.shared.delegate as? AppDelegate
+    
     let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
 
     var bills = [Bill]()
@@ -70,6 +72,8 @@ class BillViewController: UIViewController {
         Defined.ref.child("Account").child(idAdmin ?? "").child("Bill/Present").observe(DataEventType.value) { (DataSnapshot) in
             if let snapshort = DataSnapshot.children.allObjects as? [DataSnapshot]{
                 self.bills.removeAll()
+                print("sayhi")
+                self.pushNotification()
                 for snap in snapshort {
                     let id = snap.key
                     if let value = snap.value as? [String: Any] {
@@ -86,6 +90,10 @@ class BillViewController: UIViewController {
             }
             self.tableView.reloadData()
         }
+    }
+    
+    func pushNotification(){
+            self.appDelegate?.scheduleNotification(notificationType: "Local Notification")
     }
     
     
