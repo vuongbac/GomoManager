@@ -18,8 +18,8 @@ class DetailBillViewController: UIViewController {
     @IBOutlet weak var lblTotalPay: UILabel!
     @IBOutlet weak var btnEditBill: UIButton!
     
-    
     var listFood:[String] = []
+    var listNote:[String] = []
     var listPrice:[Int] = []
     var select: String?
     var phamTram = ["0","5","10","15","20","25","30","35","40","45","50"]
@@ -39,9 +39,10 @@ class DetailBillViewController: UIViewController {
     var discount1 = ""
     var totalPay1 = 0
     var money = 0
+    var collector =  ""
+    var listnote = ""
 
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         createPickerView()
@@ -64,15 +65,19 @@ class DetailBillViewController: UIViewController {
         DetailFoodCell.registerCellByNib(tableView)
         Defined.formatter.groupingSeparator = "."
         Defined.formatter.numberStyle = .decimal
-        lblCollector.text = Defined.defaults.value(forKey: "name") as? String
+        lblCollector.text = "Nhân viên: " + collector
         let tempfood = self.detailFood.split{$0 == "/"}.map(String.init)
         let tempPrice = self.listpricefood.split{$0 == "/"}.map(String.init)
+        let tempNote = self.listnote.split{$0 == "/"}.map(String.init)
         
         for i in 0..<tempfood.count{
             self.listFood.append(tempfood[i])
         }
         for i in 0..<tempPrice.count{
             self.listPrice.append(Int(tempPrice[i]) ?? 0)
+        }
+        for i in 0..<tempNote.count{
+            self.listNote.append(tempNote[i])
         }
         let total = listPrice.reduce(0, +)
         lblAmount.text = "\(Defined.formatter.string(from: NSNumber(value: total ))!)" + " đ"
@@ -108,6 +113,7 @@ class DetailBillViewController: UIViewController {
             "detilbill": detailFood ,
             "listpricefood": listpricefood ,
             "total": total,
+            "listnote": listnote,
             "discount": txtChiecKhau.text ?? "",
             "time":time,
             "date":date,
@@ -193,7 +199,8 @@ extension DetailBillViewController: UITableViewDataSource, UITableViewDelegate{
         let cell = DetailFoodCell.loadCell(tableView) as! DetailFoodCell
         let fo = listFood[indexPath.row]
         let pr = listPrice[indexPath.row]
-        cell.setUp(name: fo, price: pr)
+        let no = listNote[indexPath.row]
+        cell.setUp(name: fo, price: pr, note: no)
         return cell
     }
     

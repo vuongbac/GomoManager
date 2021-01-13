@@ -3,12 +3,15 @@
 import UIKit
 import Firebase
 import BetterSegmentedControl
+import UserNotifications
 
 class BillViewController: UIViewController {
 
     @IBOutlet weak var segmentedCustoms: BetterSegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     var appDelegate = UIApplication.shared.delegate as? AppDelegate
+    let notificationCenter = UNUserNotificationCenter.current()
+    let options: UNAuthorizationOptions = [.alert, .sound, .badge]
     
     let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
 
@@ -56,16 +59,17 @@ class BillViewController: UIViewController {
                         let total = value["total"] as! Int
                         let time = value["time"] as? String
                         let discount = value["discount"] as? String
-                        let note = value["note"] as? String
+                        let listnote = value["listnote"] as? String
                         let othermoney = value["othermoney"] as? String
                         let totalPay = value["totalpay"] as? Int
-                        let bill = Bill(id: id, othermoney: othermoney, numberTable: numbertable, detailFood:detilbill, Total: total, date: date, discouunt: discount, time: time, listpricefood: listpricefood, note: note, totalPay: totalPay)
+                        let collector = value["collector"] as? String
+                        let bill = Bill(id: id, othermoney: othermoney, numberTable: numbertable, detailFood:detilbill, Total: total, date: date, discouunt: discount, time: time, listpricefood: listpricefood, listnote:listnote, totalPay: totalPay, collector: collector)
                         self.bills.append(bill)
                     }
                 }
             }
             self.tableView.reloadData()
-        }
+        } 
     }
     
     func getBillPresent(){
@@ -73,7 +77,7 @@ class BillViewController: UIViewController {
             if let snapshort = DataSnapshot.children.allObjects as? [DataSnapshot]{
                 self.bills.removeAll()
                 print("sayhi")
-                self.pushNotification()
+                self.appDelegate?.scheduleNotification(notificationType: "Local Notification")
                 for snap in snapshort {
                     let id = snap.key
                     if let value = snap.value as? [String: Any] {
@@ -81,9 +85,11 @@ class BillViewController: UIViewController {
                         let detilbill = value["detilbill"] as! String
                         let numbertable = value["numbertable"] as! String
                         let listpricefood = value["listpricefood"] as? String
+                        let collector = value["collector"] as? String
                         let total = value["total"] as! Int
                         let time = value["time"] as! String
-                        let bill = Bill(id: id,numberTable: numbertable, detailFood: detilbill, Total: total, date: date ,time: time,listpricefood: listpricefood)
+                        let listnote = value["listnote"] as? String
+                        let bill = Bill(id: id,numberTable: numbertable, detailFood: detilbill, Total: total, date: date ,time: time,listpricefood: listpricefood,listnote: listnote, collector: collector)
                         self.bills.append(bill)
                     }
                 }
@@ -91,13 +97,8 @@ class BillViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
-    
-    func pushNotification(){
-            self.appDelegate?.scheduleNotification(notificationType: "Local Notification")
-    }
-    
-    
 }
+
 extension BillViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return bills.count
@@ -120,6 +121,8 @@ extension BillViewController: UITableViewDelegate, UITableViewDataSource{
         vc.status = status
         vc.listpricefood = detailBill.listpricefood ?? ""
         vc.totalPay1 = detailBill.totalPay ?? 0
+        vc.collector = detailBill.collector ?? ""
+        vc.listnote = detailBill.listnote ?? ""
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

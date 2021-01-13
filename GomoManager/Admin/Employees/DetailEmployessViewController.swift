@@ -5,7 +5,7 @@ import SDWebImage
 import Firebase
 
 class DetailEmployessViewController: UIViewController {
-
+    
     @IBOutlet weak var lblEmail: UILabel!
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var lblName: UILabel!
@@ -15,7 +15,7 @@ class DetailEmployessViewController: UIViewController {
     @IBOutlet weak var lblPhone: UILabel!
     @IBOutlet weak var bntDelete: UIButton!
     let idAdmin = Defined.defaults.value(forKey: "idAdmin") as? String
-
+    
     var imageE = ""
     var emailE = ""
     var nameF = ""
@@ -41,7 +41,7 @@ class DetailEmployessViewController: UIViewController {
     }
     
     @IBAction func btnEdit(_ sender: Any) {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Constans.addemploys) as! AddEmployeesViewController
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddEmployeesViewController") as! AddEmployeesViewController
         vc.edit = "edit"
         vc.nameF = nameF
         vc.emailE = emailE
@@ -55,18 +55,17 @@ class DetailEmployessViewController: UIViewController {
     }
     
     @IBAction func btbDelete(_ sender: Any) {
-        let cutEmail = emailE
-        let tempString = cutEmail.split(separator: "@")
+        let tempString = emailE.split(separator: "@")
         let em = tempString[0]
         let user = Auth.auth().currentUser
         user?.delete { error in
-          if let error = error {
-            print(error)
-          } else {
-            Defined.ref.child("Account").child(self.idAdmin ?? "").child("Employees").child("\(em)").removeValue { (error, reference) in}
-            self.navigationController?.popViewController(animated: true)          }
+            if let error = error {
+                print(error)
+            } else {
+                Defined.ref.child("Account").child(self.idAdmin ?? "").child("Employees").child("\(em)").removeValue { (error, reference) in}
+                self.navigationController?.popViewController(animated: true)
+                
+            }
         }
-       
     }
-    
 }

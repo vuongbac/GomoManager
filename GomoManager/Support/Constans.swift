@@ -21,10 +21,12 @@ class Constans {
     static let detailFood = "DetailFoodViewController"
     static let editFood = "EditFoodViewController"
     static let tabbar = "TabBarController"
-    static let addemploys = "EmployeesViewController"
+    static let addemploys = "AddEmployeesViewController"
+    static let employs = "EmployeesViewController"
     static let detailEmployes = "DetailEmployessViewController"
     static let login = "LoginViewController"
-    static let setUpTable = "setUpTableViewController" 
+    static let setUpTable = "setUpTableViewController"
+    static let notification = "NotificationViewController"
 
 
     //bill

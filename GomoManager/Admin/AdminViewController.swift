@@ -53,12 +53,13 @@ extension AdminViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Constans.addemploys) as! EmployeesViewController
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Constans.employs) as! EmployeesViewController
             self.navigationController?.pushViewController(vc, animated: true)
         case 1:
-            AlertUtil.showAlert(from: self, with: Constans.title, message: Constans.mess1)
-        case 2:
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Constans.setUpTable) as! setUpTableViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+        case 2:
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Constans.notification) as! NotificationViewController
             self.navigationController?.pushViewController(vc, animated: true)
         default:
             DispatchQueue.main.async {

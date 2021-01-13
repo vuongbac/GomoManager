@@ -3,12 +3,22 @@ import UIKit
 import GoogleSignIn
 
 class LoginViewController: UIViewController, UITabBarControllerDelegate {
-
     @IBOutlet weak var btnLogin: UIButton!
+    var isLogined:Bool = UserDefaults.standard.bool(forKey: "login")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpButton()
+        autoLogin()
         GIDSignIn.sharedInstance()?.delegate = self
+    }
+    
+    func autoLogin(){
+        if isLogined == true {
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Constans.tabbar) as! TabBarController
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
     }
     
     func setUpButton(){
@@ -35,11 +45,13 @@ extension LoginViewController: GIDSignInDelegate{
             Defined.defaults.set(email, forKey: "email" )
             Defined.defaults.set(avatar, forKey: "avatar")
             Defined.defaults.set(idAdmin, forKey: "idAdmin")
+            Defined.defaults.set(true, forKey: "login")
+            
             
             let profile = [
                 "avatar" : avatar as Any,
                 "email" : email as Any,
-                ] as [String : Any]
+            ] as [String : Any]
             Defined.ref.child("Account").child(idAdmin ?? "").child("Profile").setValue(profile)
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Constans.tabbar) as! TabBarController
             vc.modalPresentationStyle = .fullScreen
