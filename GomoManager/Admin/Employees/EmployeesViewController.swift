@@ -55,6 +55,7 @@ extension EmployeesViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = EmployeesCell.loadCell(tableView) as! EmployeesCell
         cell.setUp(data: employees[indexPath.row])
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -75,9 +76,7 @@ extension EmployeesViewController: UITableViewDelegate, UITableViewDataSource{
         let menuItems = UIMenu(title: "", options: .displayInline, children: [
             UIAction(title: "Xóa", image: UIImage(named: "ic_delete"), handler: { (_) in
                 let strEmail = e.email
-                print("say hi\(e.email)")
                 let tempString = strEmail!.split(separator: "@")
-                print("say hu\(tempString)")
                 let em = tempString[0]
                 let user = Auth.auth().currentUser
                 user?.delete { error in
@@ -85,22 +84,22 @@ extension EmployeesViewController: UITableViewDelegate, UITableViewDataSource{
                         print(error)
                     } else {
                         Defined.ref.child("Account").child(self.idAdmin ?? "").child("Employees").child("\(em)").removeValue { (error, reference) in}
-                        self.navigationController?.popViewController(animated: true)
-                        
+                        self.tableView.reloadData()
                     }
                 }
                
             }),
             
             UIAction(title: "Sửa", image: UIImage(named: "ic_task_list"), handler: { (_) in
-                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Constans.detailEmployes) as! DetailEmployessViewController
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddEmployeesViewController") as! AddEmployeesViewController
+                vc.edit = "edit"
                 vc.nameF = e.name ?? ""
                 vc.emailE = e.email ?? ""
-                vc.addF = e.address ?? ""
-                vc.phoneF = e.phone ?? ""
-                vc.imageE = e.avatar ?? ""
-                vc.ageF = e.birtday ?? ""
                 vc.sexF = e.gender ?? ""
+                vc.phoneF = e.phone ?? ""
+                vc.ageF = e.birtday ?? ""
+                vc.addF = e.address ?? ""
+                vc.avatarF = e.avatar ?? ""
                 self.present(vc, animated: true, completion: nil)
             }),
         ])

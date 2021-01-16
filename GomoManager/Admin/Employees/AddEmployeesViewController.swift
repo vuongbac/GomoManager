@@ -38,11 +38,11 @@ class AddEmployeesViewController: UIViewController {
     }
     
     func setUp(){
+        gender = "Nữ"
         ImagePicker.delegate = self
         btnAdd.addBoder(radius: 8, color: #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1))
         avatar.addShadow(radius: 10)
         avatar.addBoder(radius: 50, color: #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1))
-        subView.addBoder(radius: 20, color: #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1))
         subView.addShadow(radius: 10)
     
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
@@ -55,6 +55,7 @@ class AddEmployeesViewController: UIViewController {
         dataPicker?.addTarget(self, action: #selector(dataChange(dataPicker:)), for: .valueChanged)
 
         if edit == "edit"{
+            btnAdd.setTitle("Cập nhật", for: .normal)
             txtEmail.text =  emailE
             txtAdd.text = addF
             txtName.text = nameF
@@ -63,7 +64,7 @@ class AddEmployeesViewController: UIViewController {
             txtPhone.text = phoneF
             txtEmail.isEnabled = false
         }else{
-            print("hi say")
+            btnAdd.setTitle("Cập nhật", for: .normal)
         }
     }
     
@@ -106,9 +107,9 @@ class AddEmployeesViewController: UIViewController {
     
     @IBAction func btnSelectGender(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            gender = "nam"
+            gender = "Nam"
         }else{
-            gender = "nữ"
+            gender = "Nữ"
         }
     }
     

@@ -107,6 +107,7 @@ extension BillViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = BillCell.loadCell(tableView) as! BillCell
         cell.setUpData(data: bills[indexPath.row], s:status)
+        cell.selectionStyle = .none
         return cell
     }
     

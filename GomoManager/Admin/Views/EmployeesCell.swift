@@ -32,7 +32,7 @@ class EmployeesCell: BaseTBCell {
         lbAdd.text = data.address
         lbEmail.text = data.email
         lbPhone.text = data.phone
-        lbGerder.text = "Giới tính: \(data.gender)"
+        lbGerder.text = "Giới tính: \(data.gender ?? "")"
         lbBrithday.text = data.birtday
         userName.text = data.name
         avatar.sd_setImage(with: URL(string: data.avatar ?? ""), completed: nil)
